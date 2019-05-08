@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# TODO: declarar nuevas apps instaladas
 INSTALLED_APPS = [
     'evaluaciones.apps.EvaluacionesConfig',
     'django.contrib.admin',
