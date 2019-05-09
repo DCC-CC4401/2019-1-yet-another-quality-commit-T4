@@ -145,7 +145,7 @@ body {font-size:16px;}
     </style>
   </head>
   <body>
-  <table>
+  <table id="rubric">
     <tr>
       <th></th>
       <th>Asignar puntajes    <i class="fas fa-edit"></i></th>
@@ -160,41 +160,7 @@ body {font-size:16px;}
       <td></td>
       <td></td>
     </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+    
   </table>
   </body>
 
@@ -223,7 +189,7 @@ body {font-size:16px;}
     </head>
     <body>
       <div class="btn-group">
-        <button class="button">Agregar fila  <i class="fas fa-plus"></i></button>
+        <button class="button" onclick="addRow()">Agregar fila  <i class="fas fa-plus"></i></button>
         <button class="button">Agregar columna  <i class="fas fa-plus"></i></button>
         <button class="button">Borrar fila  <i class="fas fa-trash"></i></button>
         <button class="button">Borrar columna  <i class="fas fa-trash"></i></button>
@@ -264,6 +230,27 @@ body {font-size:16px;}
 <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
 
 <script>
+//Funcion para agregar nueva fila
+
+function addRow(){
+var table = document.getElementById("rubric");
+var row = table.insertRow(-1);
+for(var i=0;i<calculateCells();i++){
+  row.insertCell(i);
+}
+console.log("agregando nueva fila");
+}
+
+function calculateCells(){
+  var table = document.getElementById("rubric");
+  var max = 0;
+  for(var i=0;i<table.rows.length;i++) {
+      if(max < table.rows[i].cells.length)
+          max = table.rows[i].cells.length;
+  }
+  return max;
+}
+
 // Script to open and close sidebar
 function w3_open() {
   document.getElementById("mySidebar").style.display = "block";
