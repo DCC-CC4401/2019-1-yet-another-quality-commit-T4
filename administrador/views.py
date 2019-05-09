@@ -6,3 +6,9 @@ def landingpage(request):
 
 def evaluadores(request):
     return render(request, 'Admin_interface/Evaluadores_admin.html')
+
+def rubricas(request):
+    return render(request, 'Admin_interface/Rubricas_admin.html')
+
+def evaluaciones(request):
+    return render(request, 'Admin_interface/Evaluaciones_admin.html')

@@ -16,5 +16,3 @@ def postev(request):
 def postevadmin(request):
     return render(request, 'Eval_interface/postevaluacionadmin.html')
 
-def evaluacionesadmin(request):
-    return render(request, 'Admin_interface/Evaluaciones_admin.html')
