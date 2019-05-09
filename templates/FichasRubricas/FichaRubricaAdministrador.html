@@ -191,7 +191,7 @@ body {font-size:16px;}
       <div class="btn-group">
         <button class="button" onclick="addRow()">Agregar fila  <i class="fas fa-plus"></i></button>
         <button class="button">Agregar columna  <i class="fas fa-plus"></i></button>
-        <button class="button">Borrar fila  <i class="fas fa-trash"></i></button>
+        <!--<button class="button">Borrar fila  <i class="fas fa-trash"></i></button>-->
         <button class="button">Borrar columna  <i class="fas fa-trash"></i></button>
       </div>
     </body>
@@ -235,9 +235,17 @@ body {font-size:16px;}
 function addRow(){
 var table = document.getElementById("rubric");
 var row = table.insertRow(-1);
-for(var i=0;i<calculateCells();i++){
+for(var i=0;i<calculateCells()-1;i++){
   row.insertCell(i);
 }
+
+var cellIndex=calculateCells()-1;
+var rowIndex = document.getElementById("rubric").rows.length;
+
+
+var tsh = row.insertCell(cellIndex);
+
+tsh.innerHTML='Borrar Fila <span style="color:red;" onclick="deleteRow('+rowIndex+ ')" id=' +rowIndex+ ' ><i class="fa fa-trash" aria-hidden="true"></i></span> ';
 console.log("agregando nueva fila");
 }
 
@@ -249,6 +257,10 @@ function calculateCells(){
           max = table.rows[i].cells.length;
   }
   return max;
+}
+function deleteRow(index){
+  console.log('eliminar fila' +(index-1));
+  document.getElementById("rubric").deleteRow(index-1); 
 }
 
 // Script to open and close sidebar
