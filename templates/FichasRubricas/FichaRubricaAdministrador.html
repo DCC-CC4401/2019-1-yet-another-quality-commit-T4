@@ -145,24 +145,26 @@ body {font-size:16px;}
     </style>
   </head>
   <body>
+  <form action="" onkeydown="return event.key != 'Enter';">
   <table id="rubric">
     <tr>
       <th></th>
-      <th>Asignar puntajes    <i class="fas fa-edit"></i></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th><input type="text" class="form-control" placeholder="Puntaje" /><!--Asignar puntajes    <i class="fas fa-edit"></i> --></th>
+      <th><input type="text" class="form-control" placeholder="Puntaje"/></th>
+      <th><input type="text" class="form-control"  placeholder="Puntaje"/></th>
+      <th><input type="text" class="form-control"  placeholder="Puntaje"/></th>
     </tr>
     <tr>
-      <td><b>Modificar aspecto  <i class="fas fa-edit"></i></b></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td><input type="text" class="form-control" placeholder="Aspecto" /><!--<b>Modificar aspecto  <i class="fas fa-edit"></i></b>--></td>
+      <td><input type="text" class="form-control" placeholder="Descripción" /></td>
+      <td><input type="text" class="form-control" placeholder="Descripción"/></td>
+      <td><input type="text" class="form-control"placeholder="Descripción" /></td>
+      <td><input type="text" class="form-control" placeholder="Descripción"/></td>
     </tr>
     
   </table>
   </body>
+</form>
 
   <div>
     <head>
@@ -184,6 +186,11 @@ body {font-size:16px;}
         .btn-group .button { border-radius: 12px;}
 
         .btn-group .button:hover { background-color: #FFA07A; }
+
+        input {display: block; padding: 0; margin: 0; border: 0; width: 100%; background: transparent;
+        }
+        
+
 
       </style>
     </head>
@@ -235,16 +242,15 @@ body {font-size:16px;}
 function addRow(){
 var table = document.getElementById("rubric");
 var row = table.insertRow(-1);
-for(var i=0;i<calculateCells()-1;i++){
-  row.insertCell(i);
+var aspectCell = row.insertCell(0);
+aspectCell.innerHTML = '<input type="text" class="form-control" placeholder="Aspecto" />';
+for(var i=1;i<calculateCells()-1;i++){
+  var cell = row.insertCell(i);
+  cell.innerHTML = '<input type="text" class="form-control" placeholder="Descripción" />';
 }
-
 var cellIndex=calculateCells()-1;
 var rowIndex = document.getElementById("rubric").rows.length;
-
-
 var tsh = row.insertCell(cellIndex);
-
 tsh.innerHTML='Borrar Fila <span style="color:red;" onclick="deleteRow('+rowIndex+ ')" id=' +rowIndex+ ' ><i class="fa fa-trash" aria-hidden="true"></i></span> ';
 console.log("agregando nueva fila");
 }
@@ -259,8 +265,11 @@ function calculateCells(){
   return max;
 }
 function deleteRow(index){
-  console.log('eliminar fila' +(index-1));
-  document.getElementById("rubric").deleteRow(index-1); 
+  var confirmation = confirm('¿Segurx?')
+  if(confirmation){
+    console.log('eliminar fila' +(index-1));
+    document.getElementById("rubric").deleteRow(index-1); 
+  }
 }
 
 // Script to open and close sidebar
