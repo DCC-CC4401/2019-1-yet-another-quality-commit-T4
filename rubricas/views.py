@@ -12,4 +12,5 @@ def fichaadmin(request):
 
 def fichaeval(request):
     return render(request, 'FichasRubricas/FichaRubricaEvaluador.html')
-
+def test(request):
+    return "hola"
