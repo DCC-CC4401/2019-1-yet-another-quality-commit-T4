@@ -66,7 +66,3 @@ class RubricaX(models.Model):
         return self.semester
     def getPath(self):
         return self.nombre
-
-    #def getPath(self):
-    #    return self.path
-    

@@ -145,7 +145,7 @@ body {font-size:16px;}
     </style>
   </head>
 
-  <form id="myForm" action="https://www.google.com" method="GET" onkeydown="return event.key != 'Enter';">
+  <form id="myForm" action="https://www.google.com" method="get" onkeydown="return event.key != 'Enter';">
   <table class="defaultTable sar-table" id="rubric">
     <tr>
       <th><input type="text" name="" class="form-control" placeholder="Nombre Rúbrica" /></th>
@@ -155,7 +155,7 @@ body {font-size:16px;}
       <th><span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span><input type="text" name="" class="form-control"  placeholder="Puntaje"/></th>
     </tr>
   </table>
-      <input type="submit" class="button1 button1">Guardar rúbrica  <i class="far fa-save"></i></input>
+
   </form>
 
 
@@ -218,7 +218,7 @@ body {font-size:16px;}
     </style>
   </head>
   <body>
-    <button class="button1 button1">Guardar rúbrica  <i class="far fa-save"></i></button>
+    <button class="button1 button1" onclick="submitForm()">Guardar rúbrica  <i class="far fa-save"></i></button>
   </body>
 
 
@@ -232,20 +232,30 @@ body {font-size:16px;}
 
 <script>
 
+    function submitForm(){
+        compileForm();
+        var f = document.getElementById("myForm");
 
-    $('#myForm').submit(function() {
-        var table = document.getElementById("rubric");
-        var rows = table.rows;
-        var width = getColls();
-        for(var i=0;i<rows.length;i++){
-            for (var j=0; j<width;j++){
-                var inner = table.rows[i].cells[j].innerHTML;
-                inner = inner.replace('name=""','name="'+i+','+j+'"');
-                console.log(inner);
+        alert("sending");
+        f.submit();
+    }
+    function compileForm(){
+
+       var table = document.getElementById("rubric");
+            var rows = table.rows;
+            var width = getColls();
+            for (var i = 0; i < rows.length; i++) {
+                for (var j = 0; j < width; j++) {
+
+                    var field = table.rows[i].cells[j];
+                    var inputs = field.getElementsByTagName("input");
+                    inputs[0].setAttribute("name",i+","+j);
+
+                }
             }
-        }
-    return true;
-    });
+
+
+    }
 
 
 function addRow(){
