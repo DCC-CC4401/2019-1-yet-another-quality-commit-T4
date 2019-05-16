@@ -50,7 +50,7 @@ class RubricaX(models.Model):
         ("3", "Verano"),
     )
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES, default="2")
-    path=nombre+codigo+tarea+anno+semester
+    #path=nombre+codigo+tarea+anno+semester
 
     def __str__(self):
         return self.nombre
@@ -64,5 +64,5 @@ class RubricaX(models.Model):
         return self.anno
     def getSemester(self):
         return self.semester
-    def getPath(self):
-        return self.path
+    #def getPath(self):
+    #    return self.path
