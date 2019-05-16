@@ -145,7 +145,8 @@ body {font-size:16px;}
     </style>
   </head>
 
-  <form id="myForm" action="https://www.google.com" method="get" onkeydown="return event.key != 'Enter';">
+  <form id="myForm" action="saludo" method="post" onkeydown="return event.key != 'Enter';">
+      {% csrf_token %}
   <table class="defaultTable sar-table" id="rubric">
     <tr>
       <th><input type="text" name="" class="form-control" placeholder="Nombre Rúbrica" /></th>
