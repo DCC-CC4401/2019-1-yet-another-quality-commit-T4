@@ -8,325 +8,375 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <style>
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
-.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
-.w3-half img:hover{opacity:1}
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: "Poppins", sans-serif
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    .w3-half img {
+        margin-bottom: -6px;
+        margin-top: 16px;
+        opacity: 0.8;
+        cursor: pointer
+    }
+
+    .w3-half img:hover {
+        opacity: 1
+    }
 </style>
+
 <body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-    <!--Profile image -->
-  <div class="w3-container">
-      <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:200px;width:200px" alt="Avatar"></p>
-    <h3 class="w3-padding-64"><center><b>Usuario</b></center></h3>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
-    <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Cursos</a>
-    <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluadores</a>
-      <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Rúbricas</a>
-    <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluaciones</a>
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contact</a>
-  </div>
-</nav>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
+        <br>
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+        <!--Profile image -->
+        <div class="w3-container">
+            <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:200px;width:200px" alt="Avatar"></p>
+            <h3 class="w3-padding-64"><center><b>Usuario</b></center></h3>
+        </div>
+        <div class="w3-bar-block">
+            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
+            <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Cursos</a>
+            <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluadores</a>
+            <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Rúbricas</a>
+            <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluaciones</a>
+            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contact</a>
+        </div>
+    </nav>
 
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
-  <span>Company Name</span>
-</header>
+    <!-- Top menu on small screens -->
+    <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+        <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+        <span>Company Name</span>
+    </header>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-  <h1 class="w3-xxxlarge w3-text-red" style="margin: 2%;"><b>Ficha de rúbrica</b></h1>
+        <h1 class="w3-xxxlarge w3-text-red" style="margin: 2%;"><b>Ficha de rúbrica</b></h1>
 
-  <!DOCTYPE html>
-  <div class="w3-row w3-container">
-    <div class="w3-col">
-      <head>
-        <style>
-          .button2 {
-            background-color: #c6bdbb; /* Green */
-            border: none;
-            color: black;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 0.2px 2px;
-            cursor: pointer;
-          }
+        <!DOCTYPE html>
+        <div class="w3-row w3-container">
+            <div class="w3-col">
 
-          .button2 {width: 50%; border-radius: 12px;}
-          .button2.button2:hover {background-color: #FFA07A;}
+                <head>
+                    <style>
+                        .button2 {
+                            background-color: #c6bdbb;
+                            /* Green */
+                            border: none;
+                            color: black;
+                            padding: 15px 32px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin: 0.2px 2px;
+                            cursor: pointer;
+                        }
 
+                        .button2 {
+                            width: 50%;
+                            border-radius: 12px;
+                        }
 
-        </style>
-      </head>
-      <body>
-        <button class="button2 button2">Título de la rúbrica  <i class="fas fa-edit"></i></button><br>
-      </body>
-    </div>
+                        .button2.button2:hover {
+                            background-color: #FFA07A;
+                        }
+                    </style>
+                </head>
 
-    <div class = "w3-col" align="right">
-      <head>
+                <body>
+                    <!-- <button class="button2 button2">Título de la rúbrica  <i class="fas fa-edit"></i></button><br> -->
+                </body>
+            </div>
 
-        <style>
-          body {font-family: Arial, Helvetica, sans-serif;}
+            <div class="w3-col" align="right">
 
-          .form-inline label {
-            margin: 5px 0 5px 0;
-          }
+                <head>
 
-          .form-inline input {
-            vertical-align: middle;
-            margin: 5px 10px ;
-            padding: 5px;
-            width: 10%;
-            background-color: #fff;
-            border: 1px solid #ddd;
-          }
+                    <style>
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
 
-          .form-inline button {
-            padding: 5px 10px;
-            background-color: #c6bdbb;
-            border: none;
-            color: black;
-            cursor: pointer;
-            border-radius: 8px;
-          }
+                        .form-inline label {
+                            margin: 5px 0 5px 0;
+                        }
 
-          .form-inline button:hover {
-            background-color: #FFA07A;
-          }
+                        .form-inline input {
+                            vertical-align: middle;
+                            margin: 5px 10px;
+                            padding: 5px;
+                            width: 10%;
+                            background-color: #fff;
+                            border: 1px solid #ddd;
+                        }
 
+                        .form-inline button {
+                            padding: 5px 10px;
+                            background-color: #c6bdbb;
+                            border: none;
+                            color: black;
+                            cursor: pointer;
+                            border-radius: 8px;
+                        }
 
-        </style>
-      </head>
-      <body>
-        <form class="form-inline">
-          <label>Intervalo de presentación</label>
-          <input placeholder="Ej: 7-10" name="intervalo">
-          <button type="submit">Ok</button>
-        </form>
-      </body>
-    </div>
-  </div>
+                        .form-inline button:hover {
+                            background-color: #FFA07A;
+                        }
+                    </style>
+                </head>
 
+                <body>
 
-  <head>
-    <style>
-      table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-        cursor: pointer;
-        margin: 10px 0.5% 0.5%;
-      }
+                </body>
+            </div>
+        </div>
 
-      td, th {
-        border: 1px solid #665f5f;
-        text-align: left;
-        width: 20%;
-        padding: 2.3%;
-      }
+        <head>
+            <style>
+                table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                    cursor: pointer;
+                    margin: 10px 0.5% 0.5%;
+                }
 
-      tr:nth-child(even) {
-        background-color: #FFA07A;
-      }
-    </style>
-  </head>
+                td,
+                th {
+                    border: 1px solid #665f5f;
+                    text-align: left;
+                    width: 20%;
+                    padding: 2.3%;
+                }
 
-  <form id="myForm" action="saludo" method="post" onkeydown="return event.key != 'Enter';">
-      {% csrf_token %}
-  <table class="defaultTable sar-table" id="rubric">
-    <tr>
-      <th><input type="text" name="" class="form-control" placeholder="Nombre Rúbrica" /></th>
-      <th><span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span> <input type="text" name="" class="form-control" placeholder="Puntaje" /><!--Asignar puntajes    <i class="fas fa-edit"></i> --></th>
-      <th><span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span><input type="text" name="" class="form-control" placeholder="Puntaje"/></th>
-      <th><span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span><input type="text" name="" class="form-control"  placeholder="Puntaje"/></th>
-      <th><span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span><input type="text" name="" class="form-control"  placeholder="Puntaje"/></th>
-    </tr>
-  </table>
+                tr:nth-child(even) {
+                    background-color: #FFA07A;
+                }
+            </style>
+        </head>
 
-  </form>
+        <body>
+            <form id="myForm" action="data" method="post" onkeydown="return event.key != 'Enter';">
+                <label>Duración Mínima (minutos)</label>
+                <input type="number" placeholder="Ej: 7-10" name="min_duration">
+                <label>Duración Máxima (minutos)</label>
+                <input number placeholder="Ej: 10" name="max_duration"> {% csrf_token %}
+                <table class="defaultTable sar-table" id="rubric">
+                    <tr>
+                        <th>
+                            <input type="text" name="" class="form-control" placeholder="Nombre Rúbrica" />
+                        </th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span>
+                            <input type="text" name="" class="form-control" placeholder="Puntaje" />
+                            <!--Asignar puntajes    <i class="fas fa-edit"></i> --></th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span>
+                            <input type="text" name="" class="form-control" placeholder="Puntaje" />
+                        </th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span>
+                            <input type="text" name="" class="form-control" placeholder="Puntaje" />
+                        </th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span>
+                            <input type="text" name="" class="form-control" placeholder="Puntaje" />
+                        </th>
+                    </tr>
+                </table>
 
+            </form>
 
-  <div>
-    <head>
-      <style>
-        .btn-group .button {
-          background-color: #c6bdbb;
-          border: none;
-          color: black;
-          padding: 15px 4.6%;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          cursor: pointer;
-          float: left;
-          margin: 18px 2%;
-        }
+        </body>
+        <div>
 
-        .btn-group .button { border-radius: 12px;}
+            <head>
+                <style>
+                    .btn-group .button {
+                        background-color: #c6bdbb;
+                        border: none;
+                        color: black;
+                        padding: 15px 4.6%;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;
+                        cursor: pointer;
+                        float: left;
+                        margin: 18px 2%;
+                    }
 
-        .btn-group .button:hover { background-color: #FFA07A; }
+                    .btn-group .button {
+                        border-radius: 12px;
+                    }
 
-        input {display: block; padding: 0; margin: 0; border: 0; width: 100%; background: transparent;
-        }
-        
+                    .btn-group .button:hover {
+                        background-color: #FFA07A;
+                    }
 
+                    input {
+                        display: block;
+                        padding: 0;
+                        margin: 0;
+                        border: 0;
+                        width: 100%;
+                        background: transparent;
+                    }
+                </style>
+            </head>
 
-      </style>
-    </head>
-    <body>
-      <div class="btn-group">
-        <button class="button" onclick="addRow()">Agregar fila  <i class="fas fa-plus"></i></button>
-        <button class="button" onclick="addColumn()" >Agregar columna  <i class="fas fa-plus"></i></button>
+            <body>
+                <div class="btn-group">
+                    <button class="button" onclick="addRow()">Agregar fila <i class="fas fa-plus"></i></button>
+                    <button class="button" onclick="addColumn()">Agregar columna <i class="fas fa-plus"></i></button>
 
+                </div>
+            </body>
+        </div>
 
-      </div>
-    </body>
-  </div>
+        <head>
+            <style>
+                .button1 {
+                    background-color: #BF1010;
+                    border: none;
+                    color: white;
+                    padding: 45px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 10px 78%;
+                    cursor: pointer;
+                }
 
-  <head>
-    <style>
-    .button1 {
-      background-color: #BF1010;
-      border: none;
-      color: white;
-      padding: 45px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 10px 78%;
-      cursor: pointer;
-    }
+                .button1 {
+                    border-radius: 12px;
+                }
 
-    .button1 {border-radius: 12px;}
-    .button1.button1:hover {background-color: #FFA07A;}
+                .button1.button1:hover {
+                    background-color: #FFA07A;
+                }
+            </style>
+        </head>
 
-    </style>
-  </head>
-  <body>
-    <button class="button1 button1" onclick="submitForm()">Guardar rúbrica  <i class="far fa-save"></i></button>
-  </body>
+        <body>
+            <button class="button1 button1" onclick="submitForm()">Guardar rúbrica <i class="far fa-save"></i></button>
+        </body>
 
+        <!-- End page content -->
 
+        <!-- W3.CSS Container -->
+        <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+            <p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-<!-- End page content -->
+        <script>
+            function submitForm() {
+                compileForm();
+                var f = document.getElementById("myForm");
 
+                alert("sending");
+                f.submit();
+            }
 
-<!-- W3.CSS Container -->
-<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            function compileForm() {
 
-<script>
+                var table = document.getElementById("rubric");
+                var rows = table.rows;
+                var width = getColls();
+                for (var i = 0; i < rows.length; i++) {
+                    for (var j = 0; j < width; j++) {
 
-    function submitForm(){
-        compileForm();
-        var f = document.getElementById("myForm");
+                        var field = table.rows[i].cells[j];
+                        var inputs = field.getElementsByTagName("input");
+                        inputs[0].setAttribute("name", i + "," + j);
 
-        alert("sending");
-        f.submit();
-    }
-    function compileForm(){
+                    }
+                }
 
-       var table = document.getElementById("rubric");
-            var rows = table.rows;
-            var width = getColls();
-            for (var i = 0; i < rows.length; i++) {
-                for (var j = 0; j < width; j++) {
+            }
 
-                    var field = table.rows[i].cells[j];
-                    var inputs = field.getElementsByTagName("input");
-                    inputs[0].setAttribute("name",i+","+j);
+            function addRow() {
+                var table = document.getElementById("rubric");
+                var row = table.insertRow(-1);
+                var aspectCell = row.insertCell(0);
+                aspectCell.outerHTML = '<th><span style="color:red;" onclick="deleteRow(this)"><i class="fa fa-trash" aria-hidden="true"></i></span> <input type="text" name="" class="form-control" placeholder="Aspecto" /></th>';
+                for (var i = 1; i < getColls(); i++) {
+                    var cell = row.insertCell(i);
+                    cell.innerHTML = '<input type="text" name="" class="form-control" placeholder="Descripción" />';
+                }
+                console.log("agregando nueva fila");
+            }
 
+            function addColumn() {
+                var table = document.getElementById("rubric");
+                var rows = table.rows;
+                var th = rows[0].insertCell(-1);
+                th.innerHTML = '<span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span> <input type="text" name="" class="form-control" placeholder="Puntaje">';
+                for (var i = 1; i < rows.length; i++) {
+                    var td = rows[i].insertCell(-1);
+                    td.innerHTML = '<input type="text" name="" class="form-control" placeholder="Descripción" />';
                 }
             }
 
+            function getColls() {
+                var table = document.getElementById("rubric");
+                var max = 0;
+                for (var i = 0; i < table.rows.length; i++) {
+                    if (max < table.rows[i].cells.length)
+                        max = table.rows[i].cells.length;
+                }
+                return max;
+            }
 
-    }
+            function index(cell) {
+                var index = cell.parentNode.parentNode.cellIndex;
+                console.log(cell.parentNode.parentNode.cellIndex);
+                var table = document.getElementById("rubric");
+                var rows = table.rows;
+                for (var i = 0; i < rows.length; i++) {
+                    rows[i].deleteCell(index);
+                }
+            }
 
+            function deleteRow(o) {
+                var p = o.parentNode.parentNode;
+                p.parentNode.removeChild(p);
+            }
 
-function addRow(){
-var table = document.getElementById("rubric");
-var row = table.insertRow(-1);
-var aspectCell = row.insertCell(0);
-aspectCell.outerHTML = '<th><span style="color:red;" onclick="deleteRow(this)"><i class="fa fa-trash" aria-hidden="true"></i></span> <input type="text" name="" class="form-control" placeholder="Aspecto" /></th>';
-for(var i=1;i<getColls();i++){
-  var cell = row.insertCell(i);
-  cell.innerHTML = '<input type="text" name="" class="form-control" placeholder="Descripción" />';
-}
-console.log("agregando nueva fila");
-}
+            // Script to open and close sidebar
+            function w3_open() {
+                document.getElementById("mySidebar").style.display = "block";
+                document.getElementById("myOverlay").style.display = "block";
+            }
 
-function addColumn(){
-    var table = document.getElementById("rubric");
-    var rows = table.rows;
-    var th = rows[0].insertCell(-1);
-    th.innerHTML = '<span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="index(this)"></i></span> <input type="text" name="" class="form-control" placeholder="Puntaje">';
-    for(var i=1; i<rows.length;i++){
-        var td = rows[i].insertCell(-1);
-        td.innerHTML = '<input type="text" name="" class="form-control" placeholder="Descripción" />';
-    }
-}
+            function w3_close() {
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("myOverlay").style.display = "none";
+            }
 
-function getColls(){
-  var table = document.getElementById("rubric");
-  var max = 0;
-  for(var i=0;i<table.rows.length;i++) {
-      if(max < table.rows[i].cells.length)
-          max = table.rows[i].cells.length;
-  }
-  return max;
-}
-
-function index(cell){
-    var index = cell.parentNode.parentNode.cellIndex;
-    console.log(cell.parentNode.parentNode.cellIndex);
-    var table = document.getElementById("rubric");
-    var rows = table.rows;
-    for(var i=0; i<rows.length;i++){
-        rows[i].deleteCell(index);
-    }
-}
-
-function deleteRow(o){
-    var p = o.parentNode.parentNode;
-    p.parentNode.removeChild(p);
-}
-
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
-
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
-}
-
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
-
-</script>
+            // Modal Image Gallery
+            function onClick(element) {
+                document.getElementById("img01").src = element.src;
+                document.getElementById("modal01").style.display = "block";
+                var captionText = document.getElementById("caption");
+                captionText.innerHTML = element.alt;
+            }
+        </script>
 
 </body>
+
 </html>

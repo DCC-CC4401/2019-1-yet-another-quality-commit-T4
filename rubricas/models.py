@@ -1,7 +1,7 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
-class Rubrica(models.Model):
+"""class Rubrica(models.Model):
     #Relation (nombre | codigoCurso | tarea | anno | semestre | aspecto | puntaje | contenido)
     nombre = models.CharField(max_length=200)
     codigo = models.CharField(max_length=200)
@@ -35,34 +35,16 @@ class Rubrica(models.Model):
         return self.aspecto
     def getCont(self):
         return self.cont
-
+"""
 
 # Create your models here.
-class RubricaX(models.Model):
-    #Relation (nombre | codigoCurso | tarea | anno | semestre | aspecto | puntaje | contenido)
-    nombre = models.CharField(max_length=200)
-    codigo = models.CharField(max_length=200)
-    tarea = models.IntegerField()
-    anno = models.IntegerField()
-    SEMESTER_CHOICES = (
-        ("1", "Otoño"),
-        ("2", "Primavera"),
-        ("3", "Verano"),
-    )
-    semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES, default="2")
-    
+class Rubrica(models.Model):
+    #Relation (nombreRubrica | durationMin | durationMax | path)
+    nombre = models.CharField(max_length=200, unique=True)
+    durationMin = models.IntegerField(default=0)
+    durationMax = models.IntegerField()
+    Directory = models.CharField(default='/rubricas/storage/',max_length=60)
+    release_date = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
-        return self.nombre
-    def getNombre(self):
-        return self.nombre
-    def getCodigo(self):
-        return self.codigo
-    def getTarea(self):
-        return self.tarea
-    def getAnno(self):
-        return self.anno
-    def getSemester(self):
-        return self.semester
-    def getPath(self):
         return self.nombre
