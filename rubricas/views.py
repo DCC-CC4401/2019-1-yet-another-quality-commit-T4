@@ -23,11 +23,27 @@ def data(request):
     nombre = p['0,0']
     r = R(nombre=p['0,0'],durationMin=p['min_duration'],durationMax=p['max_duration'])
     r.save()
+
+    keys = p.keys()
+    aux = []
+    for key in keys:
+        aux.append(key)
+
+    n_rows = int(aux[-1].split(",")[0])+1
+    n_collumns = int(aux[-1].split(",")[1])+1
+
+    list = []
+    for i in range(n_rows):
+        row = []
+        for j in range(n_collumns):
+                row.append(p[str(i)+","+str(j)])
+        list.append(row)
+
+    print(list)
     with open('rubricas/storage/'+nombre+'.csv','w') as file:
         wr = csv.writer(file, quoting = csv.QUOTE_ALL)
-        wr.writerow([p['0,0'],p['0,1'],p['0,2']])
-    a=""
-    for cell in p:
-       a=a+" " +cell +" " +p[cell] + "\n"
-    print(p)
+        for list_row in list:
+            print(list_row)
+            wr.writerow(list_row)
+
     return rubadmin(request)
