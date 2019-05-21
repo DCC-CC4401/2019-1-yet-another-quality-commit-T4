@@ -295,12 +295,12 @@
 
         <script>
             function submitForm() {
-                var s = getSummation();
                 if(!checkSummation()){
-                    alert("Puntajes Incorrectos. ("+getSummation()+"). Se espera 6.0");
+                    alert("Puntajes Incorrectos.");
                     return;
                 }
                 compileForm();
+                
                 var min_duration = document.getElementById("min_duration").value;
                 var max_duration = document.getElementById("max_duration").value;
 
@@ -308,13 +308,14 @@
                     alert("no has seleccionado duraciones");
                     return;
                 }
+                
                 var f = document.getElementById("myForm");
 
                 f.submit();
             }
 
             function checkSummation(){
-                return (getSummation()-6.0)<0.01;
+                return Math.abs(getSummation()-6.0)<0.01;
             }
 
             function getSummation(){
@@ -332,7 +333,7 @@
                     }
                     suma = suma + parseFloat(table.rows[0].cells[index].getElementsByTagName("input")[0].value);
                 }
-                
+                console.log(suma);
                 return suma;
 
             }
