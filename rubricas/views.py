@@ -84,3 +84,15 @@ def modificarrubrica(request):
                    'data':json.dumps(cells),
                    }
                   )
+
+def procesarmodificacion(request):
+    p = request.POST
+    nombre = str(p['0,0'])
+    r = R.objects.filter(nombre=nombre).first()
+    file = r.get_path()
+    os.remove(file)
+    r.delete()
+
+    makeRubric(p)
+
+    return redirect('../a')

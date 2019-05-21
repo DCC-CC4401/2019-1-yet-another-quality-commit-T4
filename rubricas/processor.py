@@ -1,4 +1,5 @@
 import csv
+import os
 from rubricas.models import Rubrica as R
 
 def make(p):

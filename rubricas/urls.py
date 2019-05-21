@@ -12,4 +12,5 @@ urlpatterns = [
     path('a/delete_rubric',views.deleterubric),
     path('a/ver_rubrica',views.verrubrica),
     path('a/modificar_rubrica',views.modificarrubrica),
+    path('a/data',views.procesarmodificacion),
     ]
