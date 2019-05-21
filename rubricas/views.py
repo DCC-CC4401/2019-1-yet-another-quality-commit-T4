@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from rubricas.models import Rubrica as R
 from rubricas.processor import make as makeRubric, readCSV
 import json
+import os
 # Create your views here.
 
 def rubadmin(request):
@@ -28,7 +29,12 @@ def deleterubric(request):
     p = request.POST
     print(p)
     id = int(p['obj_id'])
-    R.objects.filter(id=id).delete()
+
+    r = R.objects.filter(id=id).first()
+    file = r.get_path()
+    os.remove(file)
+    r.delete()
+
     return redirect('/rub/a')
 
 def verrubrica(request):

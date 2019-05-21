@@ -295,11 +295,12 @@
 
         <script>
             function submitForm() {
+                var s = getSummation();
                 if(!checkSummation()){
                     alert("Puntajes Incorrectos. ("+getSummation()+"). Se espera 6.0");
                     return;
                 }
-
+                compileForm();
                 var min_duration = document.getElementById("min_duration").value;
                 var max_duration = document.getElementById("max_duration").value;
 
@@ -307,11 +308,8 @@
                     alert("no has seleccionado duraciones");
                     return;
                 }
-
-                compileForm();
                 var f = document.getElementById("myForm");
 
-                alert("sending");
                 f.submit();
             }
 
@@ -323,11 +321,20 @@
                 var table = document.getElementById("rubric");
                 var rows = table.rows;
                 var width = getColls();
-                var s = 0;
-                for (var c =1; c<width;c++){
-                    s+=parseFloat(table.rows[0].cells[c].getElementsByTagName("input")[0].value);
+                
+                var suma = 0;
+                for(var r = 1; r<table.rows.length;r++){
+                    var index = 0;
+                    for(var c = 1; c<getColls(); c++){
+                        if(table.rows[r].cells[c].getElementsByTagName("input")[0].value.trim()!=''){
+                            index = c;
+                        }
+                    }
+                    suma = suma + parseFloat(table.rows[0].cells[index].getElementsByTagName("input")[0].value);
                 }
-                return s;
+                
+                return suma;
+
             }
 
             function compileForm() {
