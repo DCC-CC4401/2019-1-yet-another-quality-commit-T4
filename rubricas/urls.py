@@ -10,4 +10,5 @@ urlpatterns = [
     path('ficha/e', views.fichaeval), #ficha de rubrica visto por evaluador
     path('ficha/data',views.data),
     path('a/delete_rubric',views.deleterubric),
+    path('a/ver_rubrica',views.verrubrica),
     ]

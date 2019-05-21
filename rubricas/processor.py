@@ -6,8 +6,9 @@ def make(p):
     count = R.objects.filter(nombre=nombre).count()
     if(count>0):
         nombre=nombre+"("+str(count)+")"
-    duration_min = p['min_duration']
-    duration_max = p['max_duration']
+    duration_min = int(p['min_duration'])
+    duration_max = int(p['max_duration'])
+    print(duration_min,duration_max)
     path = 'rubricas/storage/'+nombre.replace(" ","")+".csv"
     r = R(nombre=nombre, durationMin=duration_min, durationMax=duration_max, Directory=path)
     r.save()
@@ -28,9 +29,19 @@ def make(p):
         list.append(row)
 
     print(list)
-    with open(path, 'w') as file:
+    with open(path, 'w', newline='') as file:
         wr = csv.writer(file, quoting=csv.QUOTE_ALL)
         # wr.writerow([p['0,0'],p['0,1'],p['0,2']])
         for list_row in list:
             print(list_row)
             wr.writerow(list_row)
+
+def readCSV(o : R):
+    path = o.get_path()
+    l = []
+    with open(path,'r') as f:
+        r = csv.reader(f)
+        for row in r:
+            l.append(row)
+            print(row)
+    return l

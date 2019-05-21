@@ -48,3 +48,11 @@ class Rubrica(models.Model):
 
     def __str__(self):
         return self.nombre
+    def get_name(self):
+        return self.nombre
+    def get_path(self):
+        return self.Directory
+    def get_max_duration(self):
+        return self.durationMax
+    def get_min_duration(self):
+        return self.durationMin

@@ -149,14 +149,26 @@
         }
         function ver(id){
             console.log('ver ' + id);
+            var form = document.getElementById("Form");
+            form.action="ver_rubrica";
+            var elem = document.getElementById("myInput");
+            elem.value=id;
+
+            form.submit();
         }
         function modificar(id){
             console.log("modificar "+id);
         }
         function eliminar(id) {
+
             console.log("eliminar " + id);
+            var r = confirm("Eliminar?");
+            if(r==false){
+                return;
+            }
+
             var form = document.getElementById("Form");
-            form.action="delete_rubric";
+            form.action = "delete_rubric";
             var elem = document.getElementById("myInput");
             elem.value=id;
 

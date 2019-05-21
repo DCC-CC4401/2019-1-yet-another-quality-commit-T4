@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rubricas.models import Rubrica as R
-from rubricas.processor import make as makeRubric
+from rubricas.processor import make as makeRubric, readCSV
+import json
 # Create your views here.
 
 def rubadmin(request):
@@ -29,3 +30,27 @@ def deleterubric(request):
     id = int(p['obj_id'])
     R.objects.filter(id=id).delete()
     return redirect('/rub/a')
+
+def verrubrica(request):
+    p=request.POST
+    print(p)
+    print("hola")
+    id = int(p['obj_id'])
+    r = R.objects.filter(id=id).first()
+    min_duration = r.get_min_duration()
+    max_duration = r.get_max_duration()
+    cells = readCSV(r)
+    rows = len(cells)
+    colls = len(cells[0])
+    print(cells)
+    return render(request, 'FichasRubricas/FichaRubricaAdministrador.html',
+                  {'rub': r,
+                   'cells':cells,
+                   'rows':rows,
+                   'colls':colls,
+                   'max_duration':max_duration,
+                   'min_duration':min_duration,
+                   'readonly':'readonly',
+                   'data':json.dumps(cells),
+                   }
+                  )
