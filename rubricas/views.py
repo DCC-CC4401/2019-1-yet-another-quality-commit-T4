@@ -60,3 +60,27 @@ def verrubrica(request):
                    'data':json.dumps(cells),
                    }
                   )
+
+def modificarrubrica(request):
+    p=request.POST
+    print("modificando "+str(p))
+    id = int(p['obj_id'])
+    r = R.objects.filter(id=id).first()
+    min_duration = r.get_min_duration()
+    max_duration = r.get_max_duration()
+    cells = readCSV(r)
+    rows = len(cells)
+    colls = len(cells[0])
+    print(cells)
+
+    return render(request, 'FichasRubricas/FichaRubricaAdministrador.html',
+                  {'rub': r,
+                   'cells':cells,
+                   'rows':rows,
+                   'colls':colls,
+                   'max_duration':max_duration,
+                   'min_duration':min_duration,
+                   'modify':'modify',
+                   'data':json.dumps(cells),
+                   }
+                  )

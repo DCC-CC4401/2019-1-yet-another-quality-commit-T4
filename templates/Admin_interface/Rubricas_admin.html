@@ -158,6 +158,12 @@
         }
         function modificar(id){
             console.log("modificar "+id);
+            var form = document.getElementById("Form");
+            form.action="modificar_rubrica";
+            var elem = document.getElementById("myInput");
+            elem.value=id;
+
+            form.submit();
         }
         function eliminar(id) {
 
