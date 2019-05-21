@@ -3,6 +3,9 @@ from rubricas.models import Rubrica as R
 
 def make(p):
     nombre = p['0,0']
+    count = R.objects.filter(nombre=nombre).count()
+    if(count>0):
+        nombre=nombre+"("+str(count)+")"
     duration_min = p['min_duration']
     duration_max = p['max_duration']
     path = 'rubricas/storage/'+nombre.replace(" ","")+".csv"
