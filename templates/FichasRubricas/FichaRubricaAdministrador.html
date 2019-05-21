@@ -173,6 +173,10 @@
 
         <body>
             <form id="myForm" action="data" method="post" onkeydown="return event.key != 'Enter';">
+                <input id = "n_cols" name="n_cols" type="hidden">
+                <input id = "n_rows" name="n_rows" type="hidden">
+
+
                 <label>Duración Mínima (minutos)</label>
                 <input type="number" placeholder="Ej: 7-10" name="min_duration">
                 <label>Duración Máxima (minutos)</label>
@@ -297,7 +301,7 @@
             }
 
             function checkSummation(){
-                return getSummation()==6.0;
+                return (getSummation()-6.0)<0.01;
             }
 
             function getSummation(){
@@ -325,6 +329,10 @@
 
                     }
                 }
+                var n_col_input = document.getElementById("n_cols");
+                var n_rows_input = document.getElementById("n_rows");
+                n_col_input.value = width;
+                n_rows_input.value = rows.length;
 
             }
 
