@@ -75,7 +75,7 @@
         </div>
         <!--Seccion rubricas-->
 
-    <form method="POST" action="delete_rubric" id="Form">
+    <form method="POST" action="" id="Form">
         {% csrf_token %}
         <input type="hidden" id="myInput" name="obj_id" value="">
     </form>
@@ -156,6 +156,7 @@
         function eliminar(id) {
             console.log("eliminar " + id);
             var form = document.getElementById("Form");
+            form.action="delete_rubric";
             var elem = document.getElementById("myInput");
             elem.value=id;
 
