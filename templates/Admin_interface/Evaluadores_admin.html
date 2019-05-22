@@ -3,6 +3,7 @@
 <title>Plataforma de evaluación-Evaluadores</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -51,26 +52,148 @@ body {font-size:16px;}
     <p><h3>Seleccione un evaluador</p></h2>
   </div>
 
+    <!--Funcion de js que crea los botones-->
+    <script>
+      function create_buttons(evaluador, name, lname){
+
+        var the_input = document.createElement('input');
+        the_input.type = "hidden";
+        the_input.name = "evaluador";
+        the_input.value = evaluador;
+
+        var the_input2 = document.createElement('input');
+        the_input2.type = "hidden";
+        the_input2.name = "evaluador";
+        the_input2.value = evaluador;
+
+        var csrf_input = document.createElement('input');
+        csrf_input.type = "hidden";
+        csrf_input.name = "csrfmiddlewaretoken";
+        csrf_input.value = '{{ csrf_token }}';
+
+        var csrf_input2 = document.createElement('input');
+        csrf_input2.type = "hidden";
+        csrf_input2.name = "csrfmiddlewaretoken";
+        csrf_input2.value = '{{ csrf_token }}';
+
+        var the_button = document.createElement('button');
+        the_button.className = "w3-button w3-red w3-section w3-padding:10px";
+        the_button.id = "Eliminar_" + evaluador;
+        the_button.type = "submit";
+
+        //Boton
+        var modify_button = document.createElement('button');
+        modify_button.className = "w3-button w3-red w3-section w3-padding:10px";
+        modify_button.style.display = "inline-block";
+        modify_button.id = "Modificar_" + evaluador;
+        modify_button.type = "submit";
+
+        //3 inputs
+        var input_name = document.createElement('input');
+        input_name.class = "w3-input w3-border w3-margin-bottom";
+        input_name.style.display = "inline-block";
+        input_name.size = "32";
+        input_name.style.marginBottom = "10px";
+        input_name.style.marginTop = "60px";
+        input_name.name = "new_name";
+        input_name.type = "text";
+        input_name.placeholder = name;
+
+        var input_lname = document.createElement('input');
+        input_lname.class = "w3-input w3-border w3-margin-bottom";
+        input_lname.style.display = "inline-block";
+        input_lname.size = "32";
+        input_lname.style.marginBottom = "10px";
+        input_lname.name = "new_lname";
+        input_lname.type = "text";
+        input_lname.placeholder = lname;
+
+        var input_mail = document.createElement('input');
+        input_mail.class = "w3-input w3-border w3-margin-bottom";
+        input_mail.style.display = "inline-block";
+        input_mail.size = "32";
+        input_mail.name = "new_mail";
+        input_mail.type = "email";
+        input_mail.placeholder = evaluador;
+
+        var modify_form = document.createElement('form');
+        modify_form.id = "modificar_form_" + evaluador;
+        modify_form.method = "post";
+        modify_form.action = "/a/ev/modify/";
+        modify_form.style.display = "inline-block";
+        modify_form.appendChild(csrf_input2);
+        modify_form.appendChild(input_name);
+        modify_form.appendChild(input_lname);
+        modify_form.appendChild(input_mail);
+        modify_form.appendChild(the_input2);
+        modify_form.appendChild(modify_button);
+
+        var the_form = document.createElement('form');
+        the_form.id = "eliminar_form_" + evaluador;
+        the_form.title = "DEJAME BORRARTE PORFAVOR";
+        the_form.method = 'post';
+        the_form.action = "/a/ev/delete/";
+        the_form.appendChild(csrf_input);
+        the_form.appendChild(the_input);
+        the_form.appendChild(the_button);
+
+        //<span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+
+        var the_span = document.createElement('span');
+        the_span.className = "w3-button w3-xlarge w3-transparent w3-display-topright";
+        the_span.id = "close_" + evaluador;
+
+        var last_child = document.createElement('div');
+        last_child.className = "w3-margin";
+        last_child.appendChild(modify_form);
+        last_child.appendChild(the_form);
+
+
+        var second_child = document.createElement('div');
+        second_child.className = "w3-center";
+        second_child.appendChild(the_span);
+        second_child.appendChild(last_child);
+
+        var first_child = document.createElement('div');
+        first_child.className = "w3-modal-content w3-card-4 w3-animate-zoom";
+        first_child.style.width = "300px";
+        first_child.appendChild(second_child);
+
+        var new_div = document.createElement('div');
+        new_div.id = evaluador;
+        new_div.className = "w3-modal";
+        new_div.appendChild(first_child);
+
+        document.body.appendChild(new_div);
+
+        the_button.innerHTML = "Eliminar";
+        modify_button.innerHTML = "Modificar";
+        the_span.innerHTML = "×";
+        the_span.onclick = function(){
+          new_div.style.display = 'none';
+        }
+      }
+
+    </script>
 <!--Cajas evaluadores-->
+
+{% for evaluador in evaluadores %}
+  <script>
+    create_buttons("{{ evaluador.email }}", "{{ evaluador.nombre }}", "{{ evaluador.apellido }}");
+  </script>
 <div class="w3-row-padding w3-center w3-margin-top">
 <div class="w3-quarter w3-margin-top">
-    <button onclick="document.getElementById('gestionar').style.display='block'" class="w3-card w3-container w3-hover-shadow" style="max-height:380px;min-height: 317px; max-width: 300px">
-  <h3>Nombre y apellido</h3><br>
+    <button onclick="document.getElementById('{{evaluador.email}}').style.display='block'" class="w3-card w3-container w3-hover-shadow" style="max-height:380px;min-height: 317px; max-width: 300px">
+  <h3> {{ evaluador.nombre }} {{ evaluador.apellido }} </h3><br>
   <i class="fas fa-user-alt" style="font-size:100px"></i>
-  <p>Correo</p>
+  <p>{{ evaluador.email }}</p>
   </button>
+
 </div>
-    <div id="gestionar" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="width:300px">
-        <div class="w3-center"><br>
-            <span onclick="document.getElementById('gestionar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-        <div class="w3-margin">
-          <button class="w3-button w3-red w3-section w3-padding:10px" type="submit">Modificar</button><br>
-          <button class="w3-button w3-red w3-section w3-padding:10px" type="submit">Eliminar</button>
-        </div>
-      </div>
-    </div>
-    </div>
+
+
+    {% endfor %}
+
     <!--Caja de agregar-->
 <div class="w3-quarter w3-margin-top">
   <button onclick="document.getElementById('agregar').style.display='block'" class="w3-card w3-container w3-light-gray w3-hover-shadow" style="min-height: 317px; max-width: 300px">
@@ -82,14 +205,15 @@ body {font-size:16px;}
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
         <div class="w3-center"><br>
             <span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-            <form class="w3-container" action="/action_page.php">
+            <form class="w3-container" action="/a/ev/" method="post">
+                {% csrf_token %}
         <div class="w3-section">
           <label><b>Nombre</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Ingrese nombre" name="usrname" required>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Ingrese nombre" name="name" required>
           <label><b>Apellido</b></label>
-          <input class="w3-input w3-border" type="text" placeholder="Ingrese apellido" name="psw" required>
+          <input class="w3-input w3-border" type="text" placeholder="Ingrese apellido" name="lname" required>
             <label><b>Correo</b></label>
-          <input class="w3-input w3-border" type="email" placeholder="Ingrese correo" name="secc" required>
+          <input class="w3-input w3-border" type="email" placeholder="Ingrese correo" name="mail" required>
           <button class="w3-button w3-block w3-red w3-section w3-padding" type="submit">Agregar</button>
         </div>
       </form>

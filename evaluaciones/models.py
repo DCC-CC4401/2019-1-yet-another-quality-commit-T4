@@ -7,7 +7,7 @@ class Curso(models.Model):
     nombre = models.CharField(max_length=200)
     codigo = models.CharField(max_length=200)
     sex_number = models.IntegerField()
-    año = models.IntegerField()
+    anno = models.IntegerField()
     SEMESTER_CHOICES = (
         ("1", "Otoño"),
         ("2", "Primavera"),
@@ -33,8 +33,8 @@ class Evaluador(models.Model):
     apellido = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
     # TODO: hacer bien esta wea, como tan flaite la contraseña
-    contraseña = models.CharField(max_length=2)
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    contrasenna = models.CharField(max_length=10, default='inseguroxd')
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):
