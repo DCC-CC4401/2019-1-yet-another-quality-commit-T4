@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rubricas.models import Rubrica as R
-from rubricas.processor import make as makeRubric, readCSV
+from rubricas.processor import make as makeRubric, readCSV, justMakeFile
 import json
 import os
 # Create your views here.
@@ -86,13 +86,19 @@ def modificarrubrica(request):
                   )
 
 def procesarmodificacion(request):
-    p = request.POST
-    nombre = str(p['0,0'])
-    r = R.objects.filter(nombre=nombre).first()
-    file = r.get_path()
-    os.remove(file)
-    r.delete()
+    try:
+        p = request.POST
+        nombre = str(p['0,0'])
+        r = R.objects.filter(nombre=nombre).first()
 
-    makeRubric(p)
+        file = r.get_path()
+        if(file!=None):
+            os.remove(file)
+        justMakeFile(p)
+    except:
+        print("Exception ocurred")
+    #r.delete()
+
+    #makeRubric(p)
 
     return redirect('../a')
