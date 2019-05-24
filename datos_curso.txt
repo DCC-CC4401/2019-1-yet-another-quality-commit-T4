@@ -1,0 +1,7 @@
+
+Curso(nombre = "Ingenieria de Software", codigo = "cc4401",  sex_number = 1, anno = 2019, semester = 1)
+Curso(nombre = "Taller de comunicacion efectiva", codigo = "cc5613",  sex_number = 1, anno = 2019, semester = 1)
+Curso(nombre = "Ingenieria de Software", codigo = "cc4401",  sex_number = 1, anno = 2018, semester = 2)
+Curso(nombre = "Ingenieria de Software", codigo = "cc4401",  sex_number = 1, anno = 2018, semester = 1)
+Curso(nombre = "Ingenieria de Software", codigo = "cc4401",  sex_number = 1, anno = 2017, semester = 2)
+Curso(nombre = "Ingenieria de Software", codigo = "cc4401",  sex_number = 1, anno = 2017, semester = 1)
