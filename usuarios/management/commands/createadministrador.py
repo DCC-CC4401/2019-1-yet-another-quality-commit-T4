@@ -13,7 +13,7 @@ class Command(BaseCommand):
         password = getpass('Contraseña: ')
         user = User.objects.create_user(username, mail, password)
 
-        admin_group = Group.objects.get(name='administradores')
+        admin_group = Group.objects.get_or_create(name='administradores')
         user.groups.add(admin_group)
 
         administrador = Administrador(user=user)
