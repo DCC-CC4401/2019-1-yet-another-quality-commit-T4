@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -20,11 +21,17 @@ def process_login(request):
         if user is not None:
             login(request, user)
             # return HttpResponseRedirect(reverse('administrador:landing'))
-            return redirect('administrador:landing')
+            if Group.objects.get(name='administradores') in user.groups.all():
+                return redirect('administrador:landing')
+            # aca deberian ir mas ifs para los evaluadores
+            else:
+                return render(request, 'usuarios/login.html', {
+                    'error_message': "Por ahora solo soporto admins",
+                })
         else:
             return render(request, 'usuarios/login.html', {
             'error_message': "Quien eri vo xD",
-        })
+            })
 
     logout(request)
 

@@ -6,7 +6,14 @@ from django.contrib.auth.models import User
 
 
 class Administrador(models.Model):
-    """Un turbo ejemplo"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # aca deberian ir mas campos, por ahora esta lo basico
+
+    def __str__(self):
+        return self.user.username
+
+
+class Evaluador(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # aca deberian ir mas campos, por ahora esta lo basico
 
