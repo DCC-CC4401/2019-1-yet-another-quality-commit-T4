@@ -19,7 +19,7 @@ def process_login(request):
 
         if user is not None:
             login(request, user)
-            # return HttpResponseRedirect('administrador:landing')
+            # return HttpResponseRedirect(reverse('administrador:landing'))
             return redirect('administrador:landing')
         else:
             return render(request, 'usuarios/login.html', {
