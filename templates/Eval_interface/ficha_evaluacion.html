@@ -99,9 +99,8 @@ li{
     <h1 class="w3-xxxlarge w3-text-red"><b>Evaluación <i class="w3-text-green">en curso</i> </b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
     <div class="w3-container w3-center">
-    <p><b>Lambda-Ideas</b> Presentación Tarea 2 <i>CC4401-1/Otoño/2019</i></p>
-    <br>
-    
+
+
     <div class="w3-panel  w3-margin-bottom">
       <ul class="w3-ul w3-light-grey w3-center w3-card-4">
         <li class="w3-dark-grey w3-xlarge w3-padding-32">Evaluadores <i class="fas fa-user-tie"></i> </li>
@@ -115,26 +114,78 @@ li{
       </ul>
     </div>
 
-      <div class="w3-row-padding" style="margin-top:30px">
+    <div class="w3-row-padding" style="margin-top:30px">
         <div class="w3-half w3-margin-bottom ">
-          <ul class="w3-ul w3-light-grey w3-center w3-card-4">
-            <li class="w3-dark-grey w3-xlarge w3-padding-32">Miembros del equipo <i class="fas fa-user-friends"></i></li>
-            <li class="presentado w3-padding-16">Pablo Aliaga <i class="far fa-check-circle"></i> <i class="w3-small">ya presentó</i></li>
-            <li class="w3-padding-16">Bastián Matamala</li>
-            <li class="presentado w3-padding-16">Camila Quilape <i class="far fa-check-circle"></i><i class="w3-small">ya presentó</i></li>
-            <li class=" w3-padding-16">Andrea Park</li>
-          </ul>
+            <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+            <li class="w3-dark-grey w3-xlarge w3-padding-32">
+                <button onclick = "show_list('Panel')" class="w3-button w3-dark-grey w3-xlarge w3-padding-32"> Miembros del equipo<i class="fas fa-user-friends"></i></button>
+            </li>
+            </ul>
+            <div id="Panel" class="w3-hide">
+              <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+                <li class="presentado w3-padding-16">Pablo Aliaga <i class="far fa-check-circle"></i> <i class="w3-small">ya presentó</i></li>
+                <li class="w3-padding-16">Bastián Matamala</li>
+                <li class="presentado w3-padding-16">Camila Quilape <i class="far fa-check-circle"></i><i class="w3-small">ya presentó</i></li>
+                <li class=" w3-padding-16">Andrea Park</li>
+              </ul>
+            </div>
         </div>
-            
+
+
+
         <div class="w3-half w3-margin-bottom ">
-          <ul class="w3-ul w3-light-grey w3-center w3-card-4">
-            <li class="w3-dark-grey w3-xlarge w3-padding-32">Miembros que presentan <i class="fas fa-chalkboard-teacher"></i></li>
-            <li class="w3-padding-16">Andrea Park <i style="margin-left: 10px" class="w3-large fas fa-times"></i></li>
-            <li class=" opcion w3-padding-16" id="mas"> Agregar otro <i style="margin-left: 10px"  class="fas fa-user-plus"></i></li>
-            
-          </ul>
+            <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+            <li class="w3-dark-grey w3-xlarge w3-padding-32">
+                <button onclick = "show_list('Panel2')" class="w3-button w3-dark-grey w3-xlarge w3-padding-32"> Miembros del equipo<i class="fas fa-user-friends"></i></button>
+            </li>
+            </ul>
+            <div id="Panel2" class="w3-hide">
+              <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+                <li class="presentado w3-padding-16">Pablo Aliaga <i class="far fa-check-circle"></i> <i class="w3-small">ya presentó</i></li>
+                <li class="w3-padding-16">Bastián Matamala</li>
+                <li class="presentado w3-padding-16">Camila Quilape <i class="far fa-check-circle"></i><i class="w3-small">ya presentó</i></li>
+                <li class=" w3-padding-16">Andrea Park</li>
+              </ul>
+            </div>
         </div>
-      </div>
+
+        <div class="w3-half w3-margin-bottom ">
+            <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+            <li class="w3-dark-grey w3-xlarge w3-padding-32">
+                <button onclick = "show_list('Panel3')" class="w3-button w3-dark-grey w3-xlarge w3-padding-32"> Miembros del equipo<i class="fas fa-user-friends"></i></button>
+            </li>
+            </ul>
+            <div id="Panel3" class="w3-hide">
+              <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+                <li class="presentado w3-padding-16">Pablo Aliaga <i class="far fa-check-circle"></i> <i class="w3-small">ya presentó</i></li>
+                <li class="w3-padding-16">Bastián Matamala</li>
+                <li class="presentado w3-padding-16">Camila Quilape <i class="far fa-check-circle"></i><i class="w3-small">ya presentó</i></li>
+                <li class=" w3-padding-16">Andrea Park</li>
+              </ul>
+            </div>
+        </div>
+
+
+
+        <div class="w3-half w3-margin-bottom ">
+            <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+            <li class="w3-dark-grey w3-xlarge w3-padding-32">
+                <button onclick = "show_list('Panel4')" class="w3-button w3-dark-grey w3-xlarge w3-padding-32"> Miembros del equipo<i class="fas fa-user-friends"></i></button>
+            </li>
+            </ul>
+            <div id="Panel4" class="w3-hide">
+              <ul class="w3-ul w3-light-grey w3-center w3-card-4">
+                <li class="presentado w3-padding-16">Pablo Aliaga <i class="far fa-check-circle"></i> <i class="w3-small">ya presentó</i></li>
+                <li class="w3-padding-16">Bastián Matamala</li>
+                <li class="presentado w3-padding-16">Camila Quilape <i class="far fa-check-circle"></i><i class="w3-small">ya presentó</i></li>
+                <li class=" w3-padding-16">Andrea Park</li>
+              </ul>
+            </div>
+        </div>
+
+
+    </div>
+
 
     <p>Seleccione el nivel de logro alcanzado por el grupo en cada ámbito</p> </div>
     
@@ -153,10 +204,7 @@ li{
            </li>
       </ul>
     </div>
-        
-    
-    
-          
+
       <div class="w3-panel w3-margin-bottom">
         <ul class="w3-ul w3-light-grey w3-center w3-card-4">
           <li class="w3-orange w3-xlarge w3-padding-32">Calidad del material
@@ -332,6 +380,15 @@ function onClick(element) {
   document.getElementById("modal01").style.display = "block";
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
+}
+
+function show_list(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
 }
 </script>
 
