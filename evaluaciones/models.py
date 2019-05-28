@@ -10,21 +10,6 @@ class Integrante(models.Model):
     def __str__(self):
         return self.nombre
 
-# Evaluador posee nombre, apellido, email, contraseña y está asociado a un curso
-class Evaluador(models.Model):
-    nombre = models.CharField(max_length=200)
-    apellido = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
-    # TODO: hacer bien esta wea, como tan flaite la contraseña
-    contrasenna = models.CharField(max_length=10, default='inseguroxd')
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True)
-
-
-    def __str__(self):
-        return self.nombre + " " + self.apellido
-
-    class Meta:
-        verbose_name_plural = "Evaluadores"
 
 
 # Evaluación posee curso asociado, estado de evaluación (abierta, cerrada), fecha de inicio y fin, duración esperada
