@@ -15,7 +15,7 @@ class Curso(models.Model):
     # TODO: como vamos a usar strings con numeros, que flaite
     semester = models.IntegerField(choices=SEMESTER_CHOICES, default="2")
     equipos = models.ManyToManyField('Equipo')
-    evaluadores = models.ManyToManyField('Evaluador')
+    evaluadores = models.ManyToManyField(Evaluador)
 
     class Meta:
         unique_together = (('codigo', 'sex_number', 'anno', 'semester'),)
