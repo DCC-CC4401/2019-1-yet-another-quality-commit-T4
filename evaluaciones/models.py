@@ -3,15 +3,6 @@ from cursos.models import Curso
 
 # Create your models here.
 
-class Integrante(models.Model):
-    """Un turbo ejemplo"""
-    nombre = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.nombre
-
-
-
 # Evaluación posee curso asociado, estado de evaluación (abierta, cerrada), fecha de inicio y fin, duración esperada
 # de presentación y rúbrica asociada (IMPORTANTE, DEFINIR RUBRICA)
 # DEFINIR RUBRICA
