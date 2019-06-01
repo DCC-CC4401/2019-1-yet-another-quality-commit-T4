@@ -23,6 +23,11 @@ class Evaluador(models.Model):
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True)
 
 
+    def save(self, *args, **kwargs):
+        super(Evaluador, self).save(*args, **kwargs)
+        self.user.save()
+
+
     def __str__(self):
         return self.nombre + " " + self.apellido
 

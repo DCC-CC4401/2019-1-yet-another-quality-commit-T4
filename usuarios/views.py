@@ -67,8 +67,8 @@ def evaluadores(request):
     return render(request, 'Admin_interface/Evaluadores_admin.html', context={'evaluadores': evaluadores})
 
 def delete_evaluador(request):
-    mail_to_delete = request.POST.get('evaluador')
-    Evaluador.objects.filter(email = mail_to_delete).delete()
+    mail = request.POST.get('evaluador')
+    User.objects.filter(email = mail).delete()
     return redirect('/a/ev/')
 
 def modify_evaluador(request):
@@ -78,7 +78,9 @@ def modify_evaluador(request):
     previous_mail = request.POST.get('evaluador')
 
 
+
     modified = Evaluador.objects.get(email = previous_mail)
+
     if(new_name != ''):
         modified.nombre = new_name
 
@@ -87,6 +89,7 @@ def modify_evaluador(request):
 
     if(new_mail != ''):
         modified.email = new_mail
+        modified.user.username = new_mail
 
     modified.save()
     return redirect('/a/ev/')
