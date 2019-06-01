@@ -1,5 +1,6 @@
 from django.db import models
-from cursos.models import Curso
+from cursos.models import Curso, Equipo
+from datetime import datetime
 
 # Create your models here.
 
@@ -17,3 +18,9 @@ class Evaluacion(models.Model):
     fecha_inicio = models.CharField(max_length=200)
     fecha_fin = models.CharField(max_length=200)
     duracion_pres = models.CharField(max_length=200)
+
+class Resultados(models.Model):
+    evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
+    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    Directory = models.CharField(default='/evaluaciones/storage/', max_length=60)
+    release_date = models.DateTimeField(default=datetime.now)
