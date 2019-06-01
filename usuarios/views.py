@@ -49,7 +49,7 @@ def evaluadores(request):
 
         print(f'Se viene la contraseña de {name}: ', password)
         # el nombre de usuario de django sera el mail de nuestros usuarios para poder autenticar
-        user = User.objects.create_user(mail, mail, password)
+        user = User.objects.create_user(username=mail, password=password)
 
         ev_group, _ = Group.objects.get_or_create(name='evaluadores')
         user.groups.add(ev_group)
@@ -59,7 +59,6 @@ def evaluadores(request):
             user=user,
             nombre=name,
             apellido=lname,
-            email=user.email
         )
 
     evaluadores = Evaluador.objects.all()
@@ -68,10 +67,12 @@ def evaluadores(request):
 
 def delete_evaluador(request):
     mail = request.POST.get('evaluador')
-    User.objects.filter(email = mail).delete()
+    User.objects.get(username = mail).delete()
     return redirect('/a/ev/')
 
 def modify_evaluador(request):
+
+    print('hooooooooooooooooooooolaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     new_name = request.POST.get('new_name')
     new_lname = request.POST.get('new_lname')
     new_mail = request.POST.get('new_mail')
@@ -79,19 +80,20 @@ def modify_evaluador(request):
 
 
 
-    modified = Evaluador.objects.get(email = previous_mail)
+    user = User.objects.get(username = previous_mail)
+    evaluador = Evaluador.objects.get(user = user)
 
     if(new_name != ''):
-        modified.nombre = new_name
+        evaluador.nombre = new_name
 
     if(new_lname != ''):
-        modified.apellido = new_lname
+        evaluador.apellido = new_lname
 
     if(new_mail != ''):
-        modified.email = new_mail
-        modified.user.username = new_mail
+        evaluador.email = new_mail
+        evaluador.user.username = new_mail
 
-    modified.save()
+    evaluador.save()
     return redirect('/a/ev/')
 
 
