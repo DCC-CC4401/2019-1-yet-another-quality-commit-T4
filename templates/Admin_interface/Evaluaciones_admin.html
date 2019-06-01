@@ -192,8 +192,10 @@ body {font-size:16px;}
 
 
                 var curso_mod = document.createElement('select');
+                curso_mod.name="curso";
                {% for curso in cursos %}
                 var cur = document.createElement('option');
+
                 cur.value=id_curso;
                 cur.innerHTML='{{ curso.nombre }}';
                 if ('{{ curso.id }}' == id_curso ){
@@ -206,54 +208,11 @@ body {font-size:16px;}
                var fecha_ini_mod = document.createElement('input');
                fecha_ini_mod.type="datetime-local";
                fecha_ini_mod.name="fecha_ini";
-               function month(mon){
-                   if (mon=="Jan."){
-                       return "01";
-                   }
-                   else if(mon=="Feb."){
-                       return "02";
-                   }
-                   else if(mon=="March"){
-                        return "03";
-                   }
-                   else if(mon=="April"){
-                        return "04";
-                   }
-                   else if(mon=="May"){
-                        return "05";
-                   }
-                   else if(mon=="June"){
-                        return "06";
-                   }
-                   else if(mon=="July"){
-                        return "07";
-                   }
-                   else if(mon=="Aug."){
-                        return "08";
-                   }else if(mon=="Sept."){
-                        return "09";
-                   }
-                   else if(mon=="Sept."){
-                        return "10";
-                   }
-                   else if(mon=="Oct."){
-                        return "11";
-                   }else if(mon=="Nov"){
-                        return "12";
-                   }
-            }
-               fecha_ini_mod.value.month=fecha_inicio.split(" ", 4)[0];
+
 
                var fecha_fin_mod = document.createElement('input');
                fecha_fin_mod.type="datetime-local";
                fecha_fin_mod.name="fecha_fin";
-
-               var button_mod = document.createElement("button");
-               button_mod.type="submit";
-               button_mod.class="w3-button w3-large w3-red w3-right w3-round";
-               button_mod.innerHTML="Aceptar"
-
-
 
 
                form_mod.appendChild(csrf_i);
@@ -278,9 +237,11 @@ body {font-size:16px;}
 
 
                var rub_mod = document.createElement('select');
+               rub_mod.name="rubrica";
                {% for rubrica in rubricas %}
+
                 var rub = document.createElement('option');
-                rub.value='{{ rubrica.nombre }}';
+                rub.value='{{ rubrica.id}}';
                 rub.innerHTML='{{ rubrica.nombre }}';
                 if ('{{ rubrica.id }}' == id_rubrica ){
                     rub.selected="selected";
@@ -318,6 +279,19 @@ body {font-size:16px;}
 
             {% endfor %}
 
+            var this_mod = document.createElement('input');
+            this_mod.style.display = "none";
+            this_mod.name = "evaluacion";
+            this_mod.value=id;
+            form_mod.appendChild(this_mod);
+
+            var button_mod = document.createElement('button');
+            button_mod.className = "w3-button w3-large w3-red w3-right w3-round";
+            button_mod.innerHTML = 'Aceptar';
+            button_mod.id = "modificar_" + nombre;
+            button_mod.type = 'submit';
+
+            form_mod.appendChild(button_mod);
 
             div2_mod.appendChild(form_mod);
 
