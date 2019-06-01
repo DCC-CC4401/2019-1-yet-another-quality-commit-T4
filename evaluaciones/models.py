@@ -1,5 +1,7 @@
 from django.db import models
 from cursos.models import Curso
+from rubricas.models import Rubrica
+from datetime import datetime
 
 # Create your models here.
 
@@ -8,7 +10,7 @@ class Integrante(models.Model):
     nombre = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre1
 
 # Evaluador posee nombre, apellido, email, contraseña y está asociado a un curso
 class Evaluador(models.Model):
@@ -27,17 +29,26 @@ class Evaluador(models.Model):
         verbose_name_plural = "Evaluadores"
 
 
-# Evaluación posee curso asociado, estado de evaluación (abierta, cerrada), fecha de inicio y fin, duración esperada
-# de presentación y rúbrica asociada (IMPORTANTE, DEFINIR RUBRICA)
+# Evaluacion posee curso asociado, estado de evaluación (abierta, cerrada), fecha de inicio y fin, duracin esperada
+# de presentacion y rubrica asociada (IMPORTANTE, DEFINIR RUBRICA)
 # DEFINIR RUBRICA
 class Evaluacion(models.Model):
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=20)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, default=None)
     STATUS_CHOICES = (
         ("0", "Cerrada"),
         ("1", "Abierta"),
     )
     # TODO: como vamos a usar strings con numeros, que flaite
     estado = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1")
-    fecha_inicio = models.CharField(max_length=200)
-    fecha_fin = models.CharField(max_length=200)
-    duracion_pres = models.CharField(max_length=200)
+    fecha_inicio = models.DateTimeField(null=True, blank=True)
+    fecha_fin = models.DateTimeField(null=True, blank=True)
+    rubrica = models.ForeignKey(Rubrica, on_delete=models.CASCADE, default=None)
+    evaluadores = models.ManyToManyField(Evaluador)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name_plural = "Evaluaciones"
+        unique_together = [['curso', 'nombre']]

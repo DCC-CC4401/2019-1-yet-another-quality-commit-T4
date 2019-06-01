@@ -1,5 +1,5 @@
-<<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+< lang="es">
 <title>Plataforma de evaluación-Evaluaciones</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,6 @@ body {font-size:16px;}
 .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
 .w3-half img:hover{opacity:1}
 </style>
-<body>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
@@ -23,11 +22,11 @@ body {font-size:16px;}
     <h3 class="w3-padding-64"><center><b>Usuario</b></center></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
+    <a href="/a/lp" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
     <a href="#cursos" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Cursos</a>
-    <a href="#evaluadores" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluadores</a>
-      <a href="#rubricas" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Rúbricas</a>
-    <a href="#evaluaciones" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluaciones</a>
+    <a href="/a/ev" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluadores</a>
+      <a href="/a/rub" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Rúbricas</a>
+    <a href="/a/eval" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluaciones</a>
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contact</a>
   </div>
 </nav>
@@ -42,8 +41,7 @@ body {font-size:16px;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px"
-
+<div id="main_content" class="w3-main" style="margin-left:340px;margin-right:40px">
   <!-- Portada -->
   <div class="w3-container" id="portada" style="margin-top:80px; margin-bottom:10px">
     <h1 class="w3-xxxlarge w3-text-red"><b>Evaluaciones</b></h1>
@@ -51,13 +49,296 @@ body {font-size:16px;}
   </div>
 
 <div class="w3-container">
-  <button class="w3-button w3-large w3-red w3-right w3-round">Agregar nueva evaluación</button><br>
+  <button onclick="document.getElementById('agregar').style.display='block'" class="w3-button w3-large w3-red w3-right w3-round">Agregar nueva evaluación</button><br>
+
 </div>
-<!--Seccion rubricas-->
+<div id="agregar" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+      <span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+      <form method="POST" action="create/" style="padding: 20px 20px 60px 20px">
+        {% csrf_token %}
+        Nombre: <input type="text" name="nombre"> <br> <br>
+        Curso:
+          <select name = 'curso'>
+              {% for curso in cursos %}
+                    <option value="{{curso.nombre}}">{{curso.nombre}}</option>
+              {% endfor %}
+          </select><br> <br>
+        Fecha de inicio: <input type="datetime-local" name="fecha_ini"> <br> <br>
+        Fecha de término: <input type="datetime-local" name="fecha_fin"> <br> <br>
+        Rúbrica:
+          <select name="rubrica">
+              {% for rubrica in rubricas %}
+                    <option value="{{rubrica.nombre}}">{{rubrica.nombre}} </option>
+              {% endfor %}
+          </select><br> <br>
+        Evaluadores: <br>
+                {% for evaluador in evaluadores %}
+                    <input type="checkbox"  name="evals" value="{{ evaluador.email}}"> {{ evaluador.nombre}} {{evaluador.apellido}} ( {{ evaluador.email }} ) <br>
+              {% endfor %}
+        <button type="submit" class="w3-button w3-large w3-red w3-right w3-round">Aceptar</button>
+      </form>
+    </div>
+    <!--cierre de cajas de cursos-->
+</div>
+    <!--Seccion rubricas-->
+    <script>
+        function create_button(nombre, id, curso, fecha_inicio, fecha_termino, id_rubrica, estado, mis_evaluadores){
+            var super_button = document.createElement('button');
+            super_button.onclick = function(){
+                var x = document.getElementById(id);
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+            super_button.className = "w3-btn w3-red w3-block w3-margin";
+            super_button.style.width = "75%";
+            super_button.innerHTML = "<h3>" + nombre + "</h3>";
 
-<button onclick="myFunction('Demo3')" class="w3-btn w3-red w3-block w3-margin" style="width: 75%"><h3>
-    Evaluación 1</h3></button>
+            var csrf_input2 = document.createElement('input');
+            csrf_input2.type = "hidden";
+            csrf_input2.name = "csrfmiddlewaretoken";
+            csrf_input2.value = '{{ csrf_token }}';
 
+            var button_1 = document.createElement('button');
+            button_1.className = "w3-button w3-white w3-border w3-border-red w3-round-large";
+            button_1.innerHTML = 'Rúbrica asociada';
+            button_1.type = 'submit';
+
+            var rubrica_input = document.createElement('input');
+            rubrica_input.type = "hidden";
+            rubrica_input.name = "obj_id";
+            rubrica_input.value = id_rubrica;
+
+            var rubrica_form = document.createElement('form');
+            rubrica_form.method = 'post';
+            rubrica_form.action = '../../rub/a/ver_rubrica';
+            rubrica_form.appendChild(csrf_input2);
+            rubrica_form.appendChild(rubrica_input);
+            rubrica_form.appendChild(button_1);
+
+            var button_2 = document.createElement('button');
+            button_2.className = "w3-button w3-white w3-border w3-border-red w3-round-large";
+            button_2.innerHTML = 'Exportar puntajes';
+            button_2.onclick = function(){
+                if(estado == "1") {
+                    alert("La evaluación aún no termina");
+                    return;
+                }
+            }
+
+            var button_3 = document.createElement('button');
+            button_3.className = "w3-button w3-large w3-red w3-round";
+            button_3.innerHTML = 'Ver';
+
+            /*COSAS*/
+            var div_mod = document.createElement('div');
+                div_mod.id="modificar_"+nombre;
+                div_mod.className="w3-modal";
+
+                var div2_mod = document.createElement('div');
+                div2_mod.className="w3-modal-content w3-card-4 w3-animate-zoom";
+                div2_mod.style.maxWidth="600px";
+
+                //var span = document.createElement('span');
+                //span.onclick = document.getElementById('modificar').style.display='none';
+
+                var form_mod = document.createElement('form');
+                form_mod.method = 'POST';
+                form_mod.action = "modify/";
+                form_mod.style.padding = "20px 20px 60px 20px";
+
+                var csrf_i = document.createElement('input');
+                csrf_i.type = "hidden";
+                csrf_i.name = "csrfmiddlewaretoken";
+                csrf_i.value = '{{ csrf_token }}';
+
+                var name_mod = document.createElement('input');
+                name_mod.type ="text";
+                name_mod.name = "nombre";
+                name_mod.value = nombre;
+
+
+
+                var cursos_mod = document.createElement('select');
+                cursos_mod.name = 'cursos';
+
+               var fecha_ini_mod = document.createElement('input');
+               fecha_ini_mod.type="datetime-local";
+               fecha_ini_mod.name="fecha_ini";
+               function month(mon){
+                   if (mon=="Jan."){
+                       return "01";
+                   }
+                   else if(mon=="Feb."){
+                       return "02";
+                   }
+                   else if(mon=="March"){
+                        return "03";
+                   }
+                   else if(mon=="April"){
+                        return "04";
+                   }
+                   else if(mon=="May"){
+                        return "05";
+                   }
+                   else if(mon=="June"){
+                        return "06";
+                   }
+                   else if(mon=="July"){
+                        return "07";
+                   }
+                   else if(mon=="Aug."){
+                        return "08";
+                   }else if(mon=="Sept."){
+                        return "09";
+                   }
+                   else if(mon=="Sept."){
+                        return "10";
+                   }
+                   else if(mon=="Oct."){
+                        return "11";
+                   }else if(mon=="Nov"){
+                        return "12";
+                   }
+            }
+               console.log(fecha_inicio.split(" ", 4)[0]);
+               console.log(month(fecha_inicio.split(" ", 4)[0]));
+               fecha_ini_mod.value.month=fecha_inicio.split(" ", 4)[0];
+
+               var fecha_fin_mod = document.createElement('input');
+               fecha_fin_mod.type="datetime-local";
+               fecha_fin_mod.name="fecha_fin";
+
+               form_mod.appendChild(csrf_i);
+               form_mod.appendChild(name_mod);
+               form_mod.appendChild(fecha_ini_mod);
+               form_mod.appendChild(fecha_fin_mod);
+               div2_mod.appendChild(form_mod);
+               div_mod.appendChild(div2_mod);
+
+
+
+
+
+
+             //   <div id="agregar" class="w3-modal">
+ // <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+    //NOT DONE   <span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+     // <form method="POST" action="create/" style="padding: 20px 20px 60px 20px">
+
+    /*    Nombre: <input type="text" name="nombre"> <br> <br>
+        Curso:
+          <select name = 'curso'>
+               for curso in cursos %}
+                    <option value="{curso.nombre}}">{curso.nombre}}</option>
+               endfor %}
+          </select><br> <br>
+        Fecha de inicio: <input type="datetime-local" name="fecha_ini"> <br> <br>
+        Fecha de término: <input type="datetime-local" name="fecha_fin"> <br> <br>
+        Rúbrica:
+          <select name="rubrica">
+               for rubrica in rubricas %}
+                    <option value="rubrica.nombre}}">rubrica.nombre}} </option>
+               endfor %}
+          </select><br> <br>
+        Evaluadores: <br>
+                 for evaluador in evaluadores %}
+                    <input type="checkbox"  name="evals" value="{evaluador.email}}"> {evaluador.nombre}} {evaluador.apellido}} ( {evaluador.email }} ) <br>
+               endfor
+        <button type="submit" class="w3-button w3-large w3-red w3-right w3-round">Aceptar</button>
+      </form>
+    </div>
+    <!--cierre de cajas de cursos-->
+</div>*/
+            /*FINCOSAS*/
+
+            var button_4 = document.createElement('button');
+            button_4.className = "w3-button w3-large w3-red w3-margin-left w3-round";
+            button_4.innerHTML = 'Modificar';
+            button_4.id='Modificar_';
+            button_4.onclick = function() {
+                var x = document.getElementById("modificar_"+nombre);
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+            button_4.type='submit';
+
+
+
+
+            var button_5 = document.createElement('button');
+            button_5.className = "w3-button w3-large w3-red w3-right w3-round";
+            button_5.innerHTML = 'Eliminar';
+            button_5.id = "Eliminar_" + nombre;
+            button_5.type = 'submit';
+
+            var delete_input = document.createElement('input');
+            delete_input.type = "hidden";
+            delete_input.name = "id_evaluacion";
+            delete_input.value = id;
+
+            var csrf_input = document.createElement('input');
+            csrf_input.type = "hidden";
+            csrf_input.name = "csrfmiddlewaretoken";
+            csrf_input.value = '{{ csrf_token }}';
+
+            var delete_form = document.createElement('form');
+            delete_form.id = "eliminar_form_" + nombre;
+            delete_form.method = 'post';
+            delete_form.action = 'delete/';
+            delete_form.appendChild(csrf_input);
+            delete_form.appendChild(delete_input);
+            delete_form.appendChild(button_5);
+
+            var li1 = document.createElement('li');
+            li1.innerHTML = "Curso: " + curso;
+
+            var li2 = document.createElement('li');
+            li2.innerHTML = "Fecha de inicio: " + fecha_inicio;
+
+            var li3 = document.createElement('li');
+            li3.innerHTML = "Fecha de termino: " + fecha_termino;
+
+            var par = document.createElement('p');
+            par.appendChild(li1);
+            par.appendChild(li2);
+            par.appendChild(li3);
+            par.appendChild(rubrica_form);
+            par.appendChild(button_2);
+
+            var div = document.createElement('div');
+            div.id = id;
+            div.className = "w3-hide w3-container w3-pale-red w3-padding-large w3-margin";
+            div.style.width = '75%';
+            div.appendChild(par);
+            div.appendChild(button_3);
+            div.appendChild(button_4);
+            div.appendChild(delete_form);
+
+            document.getElementById("main_content").appendChild(super_button);
+            document.getElementById("main_content").appendChild(div);
+            document.getElementById("main_content").appendChild(div_mod);
+
+        }
+
+
+    </script>
+
+{% for evaluacion in evaluaciones %}
+    <script>
+        create_button('{{ evaluacion.nombre }}', '{{ evaluacion.id }}', '{{ evaluacion.curso }}', '{{ evaluacion.fecha_inicio }}', '{{ evaluacion.fecha_fin }}', '{{ evaluacion.rubrica.id }}', '{{ evaluacion.estado }}');
+        console.log({{ evaluacion.evaluadores.first }});
+    </script>
+
+{% endfor %}
+
+<!--
 <div id="Demo3" class="w3-hide w3-container w3-pale-red  w3-padding-large w3-margin"style="width: 75%">
 
   <p><li>Curso: -</li>
@@ -72,22 +353,10 @@ body {font-size:16px;}
   <button class="w3-button w3-large w3-red w3-right w3-round">Eliminar</button>
 </div>
 
+
 <button onclick="myFunction('Demo4')" class="w3-btn w3-red w3-block w3-margin" style="width: 75%"><h3>
     Evaluación 2</h3></button>
-
-<div id="Demo4" class="w3-hide w3-container w3-pale-red w3-padding-large w3-margin"style="width: 75%">
-  <p><li>Curso: -</li>
-    <li>Fecha inicio: -</li>
-    <li>Fecha término: -</li>
-    <button class="w3-button w3-white w3-border w3-border-red w3-round-large">Rúbrica asociada</button>
-  <button class="w3-button w3-white w3-border w3-border-red w3-round-large">Exportar puntajes</button><br>
-</p>
-   <button class="w3-button w3-large w3-red w3-round">Ver</button>
-  <button class="w3-button w3-large w3-red w3-margin-left w3-round">Modificar</button>
-  <button class="w3-button w3-large w3-red w3-right w3-round">Eliminar</button>
-</div>
-
-
+-->
 
 </div>
 <script>
@@ -100,6 +369,5 @@ function myFunction(id) {
   }
 }
 </script>
-
 </body>
 </html>

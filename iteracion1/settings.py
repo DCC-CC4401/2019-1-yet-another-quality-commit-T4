@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rubricas.apps.RubricasConfig',
+    'django.forms'
 ]
 
 MIDDLEWARE = [
