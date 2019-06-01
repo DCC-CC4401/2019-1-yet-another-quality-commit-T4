@@ -61,7 +61,7 @@ def evaluadores(request):
             apellido=lname,
         )
 
-    evaluadores = Evaluador.objects.all()
+    evaluadores = Evaluador.objects.order_by('-id').all()
 
     return render(request, 'Admin_interface/Evaluadores_admin.html', context={'evaluadores': evaluadores})
 

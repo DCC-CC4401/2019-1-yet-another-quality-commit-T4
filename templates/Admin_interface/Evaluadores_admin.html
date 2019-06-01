@@ -1,235 +1,236 @@
 {% extends "real_templates/barra_navegacion.html" %}
 {% block title %}
-<title>Plataforma de evaluación-Evaluadores</title>
-{%  endblock %}
+    <title>Plataforma de evaluación-Evaluadores</title>
+{% endblock %}
 {% block styles %}
 
 {% endblock %}
 {% block content %}
-  <!-- Portada -->
-  <div class="w3-container" id="portada" style="margin-top:80px; margin-bottom:10px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Evaluadores</b></h1>
-    <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p><h3>Seleccione un evaluador</h3></p>
-  </div>
+    <!-- Portada -->
+    <div class="w3-container" id="portada" style="margin-top:80px; margin-bottom:10px">
+        <h1 class="w3-xxxlarge w3-text-red"><b>Evaluadores</b></h1>
+        <hr style="width:50px;border:5px solid red" class="w3-round">
+        <p>
+        <h3>Seleccione un evaluador</h3></p>
+    </div>
 
-<!--Funcion de js que crea los botones-->
-<script>
-    function create_buttons(evaluador, name, lname) {
-
-        var the_input = document.createElement('input');
-        the_input.type = "hidden";
-        the_input.name = "evaluador";
-        the_input.value = evaluador;
-
-        var the_input2 = document.createElement('input');
-        the_input2.type = "hidden";
-        the_input2.name = "evaluador";
-        the_input2.value = evaluador;
-
-        var csrf_input = document.createElement('input');
-        csrf_input.type = "hidden";
-        csrf_input.name = "csrfmiddlewaretoken";
-        csrf_input.value = '{{ csrf_token }}';
-
-        var csrf_input2 = document.createElement('input');
-        csrf_input2.type = "hidden";
-        csrf_input2.name = "csrfmiddlewaretoken";
-        csrf_input2.value = '{{ csrf_token }}';
-
-        var the_button = document.createElement('button');
-        the_button.className = "w3-button w3-red w3-section w3-padding:10px";
-        the_button.id = "Eliminar_" + evaluador;
-        the_button.type = "submit";
-
-        //Boton
-        var modify_button = document.createElement('button');
-        modify_button.className = "w3-button w3-red w3-section w3-padding:10px";
-        modify_button.style.display = "inline-block";
-        modify_button.id = "Modificar_" + evaluador;
-        modify_button.type = "submit";
-
-        //3 inputs
-        var input_name = document.createElement('input');
-        input_name.class = "w3-input w3-border w3-margin-bottom";
-        input_name.style.display = "inline-block";
-        input_name.size = "32";
-        input_name.style.marginBottom = "10px";
-        input_name.style.marginTop = "60px";
-        input_name.name = "new_name";
-        input_name.type = "text";
-        input_name.placeholder = name;
-
-        var input_lname = document.createElement('input');
-        input_lname.class = "w3-input w3-border w3-margin-bottom";
-        input_lname.style.display = "inline-block";
-        input_lname.size = "32";
-        input_lname.style.marginBottom = "10px";
-        input_lname.name = "new_lname";
-        input_lname.type = "text";
-        input_lname.placeholder = lname;
-
-        var input_mail = document.createElement('input');
-        input_mail.class = "w3-input w3-border w3-margin-bottom";
-        input_mail.style.display = "inline-block";
-        input_mail.size = "32";
-        input_mail.name = "new_mail";
-        input_mail.type = "email";
-        input_mail.placeholder = evaluador;
-
-        var modify_form = document.createElement('form');
-        modify_form.id = "modificar_form_" + evaluador;
-        modify_form.method = "post";
-        modify_form.action = "/a/ev/modify/";
-        modify_form.style.display = "inline-block";
-        modify_form.onsubmit = () => {
-            event.preventDefault();
-            validateEmail(modify_form, "new_mail");
-        };
-
-        console.log('HOLAAAAAAAAAAAAA:', modify_form)
-        modify_form.appendChild(csrf_input2);
-        modify_form.appendChild(input_name);
-        modify_form.appendChild(input_lname);
-        modify_form.appendChild(input_mail);
-        modify_form.appendChild(the_input2);
-        modify_form.appendChild(modify_button);
-
-        var the_form = document.createElement('form');
-        the_form.id = "eliminar_form_" + evaluador;
-        the_form.title = "DEJAME BORRARTE PORFAVOR";
-        the_form.method = 'post';
-        the_form.action = "/a/ev/delete/";
-        the_form.appendChild(csrf_input);
-        the_form.appendChild(the_input);
-        the_form.appendChild(the_button);
-
-        //<span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-
-        var the_span = document.createElement('span');
-        the_span.className = "w3-button w3-xlarge w3-transparent w3-display-topright";
-        the_span.id = "close_" + evaluador;
-
-        var last_child = document.createElement('div');
-        last_child.className = "w3-margin";
-        last_child.appendChild(modify_form);
-        last_child.appendChild(the_form);
-
-
-        var second_child = document.createElement('div');
-        second_child.className = "w3-center";
-        second_child.appendChild(the_span);
-        second_child.appendChild(last_child);
-
-        var first_child = document.createElement('div');
-        first_child.className = "w3-modal-content w3-card-4 w3-animate-zoom";
-        first_child.style.width = "300px";
-        first_child.appendChild(second_child);
-
-        var new_div = document.createElement('div');
-        new_div.id = evaluador;
-        new_div.className = "w3-modal";
-        new_div.appendChild(first_child);
-
-        document.body.appendChild(new_div);
-
-        the_button.innerHTML = "Eliminar";
-        modify_button.innerHTML = "Modificar";
-        the_span.innerHTML = "×";
-        the_span.onclick = function () {
-            new_div.style.display = 'none';
-        }
-    }
-
-</script>
-<!--Cajas evaluadores-->
-
-{% for evaluador in evaluadores %}
+    <!--Funcion de js que crea los botones-->
     <script>
-        create_buttons("{{ evaluador.email }}", "{{ evaluador.nombre }}", "{{ evaluador.apellido }}");
-    </script>
-    <div class="w3-row-padding w3-center w3-margin-top">
-    <div class="w3-quarter w3-margin-top">
-        <button onclick="document.getElementById('{{ evaluador.email }}').style.display='block'"
-                class="w3-card w3-container w3-hover-shadow"
-                style="max-height:380px;min-height: 317px; max-width: 300px">
-            <h3> {{ evaluador.nombre }} {{ evaluador.apellido }} </h3><br>
-            <i class="fas fa-user-alt" style="font-size:100px"></i>
-            <p>{{ evaluador.email }}</p>
-        </button>
+        function create_buttons(evaluador, name, lname) {
 
-    </div>
+            var the_input = document.createElement('input');
+            the_input.type = "hidden";
+            the_input.name = "evaluador";
+            the_input.value = evaluador;
+
+            var the_input2 = document.createElement('input');
+            the_input2.type = "hidden";
+            the_input2.name = "evaluador";
+            the_input2.value = evaluador;
+
+            var csrf_input = document.createElement('input');
+            csrf_input.type = "hidden";
+            csrf_input.name = "csrfmiddlewaretoken";
+            csrf_input.value = '{{ csrf_token }}';
+
+            var csrf_input2 = document.createElement('input');
+            csrf_input2.type = "hidden";
+            csrf_input2.name = "csrfmiddlewaretoken";
+            csrf_input2.value = '{{ csrf_token }}';
+
+            var the_button = document.createElement('button');
+            the_button.className = "w3-button w3-red w3-section w3-padding:10px";
+            the_button.id = "Eliminar_" + evaluador;
+            the_button.type = "submit";
+
+            //Boton
+            var modify_button = document.createElement('button');
+            modify_button.className = "w3-button w3-red w3-section w3-padding:10px";
+            modify_button.style.display = "inline-block";
+            modify_button.id = "Modificar_" + evaluador;
+            modify_button.type = "submit";
+
+            //3 inputs
+            var input_name = document.createElement('input');
+            input_name.class = "w3-input w3-border w3-margin-bottom";
+            input_name.style.display = "inline-block";
+            input_name.size = "32";
+            input_name.style.marginBottom = "10px";
+            input_name.style.marginTop = "60px";
+            input_name.name = "new_name";
+            input_name.type = "text";
+            input_name.placeholder = name;
+
+            var input_lname = document.createElement('input');
+            input_lname.class = "w3-input w3-border w3-margin-bottom";
+            input_lname.style.display = "inline-block";
+            input_lname.size = "32";
+            input_lname.style.marginBottom = "10px";
+            input_lname.name = "new_lname";
+            input_lname.type = "text";
+            input_lname.placeholder = lname;
+
+            var input_mail = document.createElement('input');
+            input_mail.class = "w3-input w3-border w3-margin-bottom";
+            input_mail.style.display = "inline-block";
+            input_mail.size = "32";
+            input_mail.name = "new_mail";
+            input_mail.type = "email";
+            input_mail.placeholder = evaluador;
+
+            var modify_form = document.createElement('form');
+            modify_form.id = "modificar_form_" + evaluador;
+            modify_form.method = "post";
+            modify_form.action = "/a/ev/modify/";
+            modify_form.style.display = "inline-block";
+            modify_form.onsubmit = () => {
+                event.preventDefault();
+                validateEmail(modify_form, "new_mail");
+            };
+
+            console.log('HOLAAAAAAAAAAAAA:', modify_form)
+            modify_form.appendChild(csrf_input2);
+            modify_form.appendChild(input_name);
+            modify_form.appendChild(input_lname);
+            modify_form.appendChild(input_mail);
+            modify_form.appendChild(the_input2);
+            modify_form.appendChild(modify_button);
+
+            var the_form = document.createElement('form');
+            the_form.id = "eliminar_form_" + evaluador;
+            the_form.title = "DEJAME BORRARTE PORFAVOR";
+            the_form.method = 'post';
+            the_form.action = "/a/ev/delete/";
+            the_form.appendChild(csrf_input);
+            the_form.appendChild(the_input);
+            the_form.appendChild(the_button);
+
+            //<span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+
+            var the_span = document.createElement('span');
+            the_span.className = "w3-button w3-xlarge w3-transparent w3-display-topright";
+            the_span.id = "close_" + evaluador;
+
+            var last_child = document.createElement('div');
+            last_child.className = "w3-margin";
+            last_child.appendChild(modify_form);
+            last_child.appendChild(the_form);
 
 
-{% endfor %}
+            var second_child = document.createElement('div');
+            second_child.className = "w3-center";
+            second_child.appendChild(the_span);
+            second_child.appendChild(last_child);
 
-<!--Caja de agregar-->
-<div class="w3-quarter w3-margin-top">
-    <button onclick="document.getElementById('agregar').style.display='block'"
-            class="w3-card w3-container w3-light-gray w3-hover-shadow" style="min-height: 317px; max-width: 300px">
-        <h3>Agregar evaluador nuevo</h3><br>
-        <i class="fas fa-user-plus" style="font-size:80px;text-align: center; padding: 10px"></i>
-    </button>
-</div>
-<div id="agregar" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-        <div class="w3-center"><br>
-            <span onclick="document.getElementById('agregar').style.display='none'"
-                  class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-            <form name="agregarForm" class="w3-container" action="/a/ev/" method="post" onsubmit="event.preventDefault(); validateEmail(document.forms.agregarForm, 'mail')">
-                {% csrf_token %}
-                <div class="w3-section">
-                    <label><b>Nombre</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Ingrese nombre"
-                           name="name" required>
-                    <label><b>Apellido</b></label>
-                    <input class="w3-input w3-border" type="text" placeholder="Ingrese apellido" name="lname" required>
-                    <label><b>Correo</b></label>
-                    <input class="w3-input w3-border" type="email" placeholder="Ingrese correo" name="mail" required>
-                    <button class="w3-button w3-block w3-red w3-section w3-padding" type="submit">Agregar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!--cierre de cajas de cursos-->
-</div>
-<!--cierre de contenido-->
-</div>
-<<<<<<< HEAD
-{% endblock %}
-=======
-<script>
-    // Script to open and close sidebar
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementById("myOverlay").style.display = "block";
-    }
+            var first_child = document.createElement('div');
+            first_child.className = "w3-modal-content w3-card-4 w3-animate-zoom";
+            first_child.style.width = "300px";
+            first_child.appendChild(second_child);
 
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("myOverlay").style.display = "none";
-    }
+            var new_div = document.createElement('div');
+            new_div.id = evaluador;
+            new_div.className = "w3-modal";
+            new_div.appendChild(first_child);
 
-    // Modal Image Gallery
-    function onClick(element) {
-        document.getElementById("img01").src = element.src;
-        document.getElementById("modal01").style.display = "block";
-        var captionText = document.getElementById("caption");
-        captionText.innerHTML = element.alt;
-    }
+            document.body.appendChild(new_div);
 
-    // validar form de agregar
-    function validateEmail(form, field_name) {
-        const used_mails = [{% for eval in evaluadores %}"{{ eval.email }}",{% endfor %}];
-        if (!used_mails.includes(form[field_name].value)) {
-            form.submit();
-            return true;
-        } else {
-            alert("El mail ya existe, porfa pon otro, gracias bai.");
-            return false;
+            the_button.innerHTML = "Eliminar";
+            modify_button.innerHTML = "Modificar";
+            the_span.innerHTML = "×";
+            the_span.onclick = function () {
+                new_div.style.display = 'none';
+            }
         }
-    }
-</script>
-</div>
-</body>
->>>>>>> gabriel/evaluador-con-usuarios-django
+
+    </script>
+    <!--Cajas evaluadores-->
+
+    {% for evaluador in evaluadores %}
+        <script>
+            create_buttons("{{ evaluador.email }}", "{{ evaluador.nombre }}", "{{ evaluador.apellido }}");
+        </script>
+        <div class="w3-col-padding w3-center w3-margin-top">
+            <div class="w3-quarter w3-margin-top">
+                <button onclick="document.getElementById('{{ evaluador.email }}').style.display='block'"
+                        class="w3-card w3-container w3-hover-shadow"
+                        style="max-height:380px;min-height: 317px; max-width: 300px">
+                    <h3> {{ evaluador.nombre }} {{ evaluador.apellido }} </h3><br>
+                    <i class="fas fa-user-alt" style="font-size:100px"></i>
+                    <p>{{ evaluador.email }}</p>
+                </button>
+            </div>
+        </div>
+
+
+    {% endfor %}
+
+    <!--Caja de agregar-->
+    <div class="w3-quarter w3-margin-top">
+        <button onclick="document.getElementById('agregar').style.display='block'"
+                class="w3-card w3-container w3-light-gray w3-hover-shadow" style="min-height: 317px; max-width: 300px">
+            <h3>Agregar evaluador nuevo</h3><br>
+            <i class="fas fa-user-plus" style="font-size:80px;text-align: center; padding: 10px"></i>
+        </button>
+    </div>
+    <div id="agregar" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+            <div class="w3-center"><br>
+                <span onclick="document.getElementById('agregar').style.display='none'"
+                      class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+                <form name="agregarForm" class="w3-container" action="/a/ev/" method="post"
+                      onsubmit="event.preventDefault(); validateEmail(document.forms.agregarForm, 'mail')">
+                    {% csrf_token %}
+                    <div class="w3-section">
+                        <label><b>Nombre</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Ingrese nombre"
+                               name="name" required>
+                        <label><b>Apellido</b></label>
+                        <input class="w3-input w3-border" type="text" placeholder="Ingrese apellido" name="lname"
+                               required>
+                        <label><b>Correo</b></label>
+                        <input class="w3-input w3-border" type="email" placeholder="Ingrese correo" name="mail"
+                               required>
+                        <button class="w3-button w3-block w3-red w3-section w3-padding" type="submit">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--cierre de cajas de cursos-->
+    </div>
+    <!--cierre de contenido-->
+    </div>
+
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+
+        // validar form de agregar
+        function validateEmail(form, field_name) {
+            const used_mails = [{% for eval in evaluadores %}"{{ eval.email }}",{% endfor %}];
+            if (!used_mails.includes(form[field_name].value)) {
+                form.submit();
+                return true;
+            } else {
+                alert("El mail ya existe, porfa pon otro, gracias bai.");
+                return false;
+            }
+        }
+    </script>
+    </div>
+{% endblock %}
