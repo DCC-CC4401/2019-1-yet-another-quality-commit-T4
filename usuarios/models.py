@@ -14,11 +14,25 @@ class Administrador(models.Model):
 
 
 class Evaluador(models.Model):
+    # el mail va a ser el nombre de usuario del user de django
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # aca deberian ir mas campos, por ahora esta lo basico
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
+
+    @property
+    def email(self):
+        return self.user.username
+
+
+    @email.setter
+    def email(self, email):
+        self.user.username = email
+
+
+    def save(self, *args, **kwargs):
+        super(Evaluador, self).save(*args, **kwargs)
+        self.user.save()
 
 
     def __str__(self):
