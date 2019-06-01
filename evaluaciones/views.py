@@ -5,7 +5,7 @@ def evaluacion(request):
     return render(request, 'Eval_interface/evaluacion.html')
 
 def evadmin(request):
-    return render(request, 'Eval_interface/evaluacionadmin.html')
+    return render(request, 'Eval_interface/ficha_evaluacion.html')
 
 def evmobile(request):
     return render(request, 'Eval_interface/evaluacionMobile.html')
