@@ -1,4 +1,5 @@
 from django.db import models
+from usuarios.models import Evaluador, Administrador
 
 # Curso posee nombre, codigo, numero de seccion, año y semetre de realizacion
 class Curso(models.Model):
@@ -14,6 +15,7 @@ class Curso(models.Model):
     # TODO: como vamos a usar strings con numeros, que flaite
     semester = models.IntegerField(choices=SEMESTER_CHOICES, default="2")
     equipos = models.ManyToManyField('Equipo')
+    evaluadores = models.ManyToManyField('Evaluador')
 
     # Para obtener el valor de la opcion del semestre, usar get_semester_display()
     def __str__(self):
@@ -25,7 +27,13 @@ class Estudiante(models.Model):
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.nombre + " " +self.apellido + " " +self.rut
+
 
 class Equipo(models.Model):
     nombre = models.CharField(max_length=200)
     estudiantes = models.ManyToManyField('Estudiante')
+
+    def __str__(self):
+        return self.nombre
