@@ -17,6 +17,9 @@ class Curso(models.Model):
     equipos = models.ManyToManyField('Equipo')
     evaluadores = models.ManyToManyField('Evaluador')
 
+    class Meta:
+        unique_together = (('codigo', 'sex_number', 'anno', 'semester'),)
+
     # Para obtener el valor de la opcion del semestre, usar get_semester_display()
     def __str__(self):
         return self.nombre + " " + self.codigo + "-" + str(self.sex_number) + " " + str(self.anno) + " " + self.get_semester_display()
