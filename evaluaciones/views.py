@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import json
+
+from evaluaciones.models import Evaluacion
 from rubricas.processor import readCSV as reader
 from rubricas.models import Rubrica as R
 # Create your views here.
@@ -14,8 +16,10 @@ def evaluacion(request):
     header = json.dumps(header)
     return render(request, 'Eval_interface/evaluacion.html', context={'data':data,'header':header})
 
-def evadmin(request):
-    return render(request, 'Eval_interface/ficha_evaluacion.html')
+def evadmin(request, evaluacion_id):
+    print(evaluacion_id)
+    eval = Evaluacion.objects.get(id=evaluacion_id)
+    return render(request, 'Eval_interface/ficha_evaluacion.html', context=eval)
 
 def evmobile(request):
     return render(request, 'Eval_interface/evaluacionMobile.html')
