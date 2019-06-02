@@ -13,9 +13,7 @@ urlpatterns = [
     path('eval/delete/', views.deleteEvaluacion),
     path('eval/create/', views.createEvaluacion),
     path('eval/modify/', views.modifyEvaluacion),
+    path('eval/', views.evaluaciones), #Lista de evaluaciones de admin
     path('rub/', views.rubricas), #Rubricas vistas por el admin
-    path('eval/', views.evaluaciones) #Lista de evaluaciones de admin
-
-
 
 ]

@@ -1,4 +1,5 @@
 from django.db import models
+
 from cursos.models import Curso, Equipo
 from rubricas.models import Rubrica
 from usuarios.models import Evaluador
