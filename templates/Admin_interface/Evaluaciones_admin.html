@@ -64,8 +64,8 @@ body {font-size:16px;}
                     <option value="{{curso.nombre}}">{{curso.nombre}}</option>
               {% endfor %}
           </select><br> <br>
-        Fecha de inicio: <input type="datetime-local" name="fecha_ini" value="2018-06-12T19:30"> <br> <br>
-        Fecha de término: <input type="datetime-local" name="fecha_fin" value="2018-06-12T19:30"> <br> <br>
+        Fecha de inicio: <input type="date" name="fecha_ini" value="2017-06-01"> <br> <br>
+        Fecha de término: <input type="date" name="fecha_fin" value="2017-06-01"> <br> <br>
         Rúbrica:
           <select name="rubrica">
               {% for rubrica in rubricas %}
@@ -83,7 +83,7 @@ body {font-size:16px;}
 </div>
     <!--Seccion rubricas-->
     <script>
-        function create_button(nombre, id, curso, fecha_inicio, fecha_termino, id_rubrica, estado, mis_evals, id_curso){
+        function create_button(nombre, id, curso, fecha_inicio, fecha_termino, id_rubrica, estado, mis_evals, id_curso, fecha_ini2, fecha_fin2){
             var super_button = document.createElement('button');
             super_button.onclick = function(){
                 var x = document.getElementById(id);
@@ -137,15 +137,7 @@ body {font-size:16px;}
             the_span.className = "w3-button w3-xlarge w3-transparent w3-display-topright";
             the_span.id = "close_" + id;
             the_span.innerHTML = "×";
-
-
-
-
             /*COSAS*/
-
-
-
-
 
                 var div2_mod = document.createElement('div');
                 div2_mod.className="w3-modal-content w3-card-4 w3-animate-zoom";
@@ -206,15 +198,16 @@ body {font-size:16px;}
 
 
                var fecha_ini_mod = document.createElement('input');
-               fecha_ini_mod.type="datetime-local";
+               fecha_ini_mod.type="date";
                fecha_ini_mod.name="fecha_ini";
-                console.log(fecha_inicio);
                fecha_ini_mod.value=fecha_inicio;
+               console.log(fecha_ini_mod.valueAsDate);
 
 
                var fecha_fin_mod = document.createElement('input');
-               fecha_fin_mod.type="datetime-local";
+               fecha_fin_mod.type="date";
                fecha_fin_mod.name="fecha_fin";
+               fecha_fin_mod.value=fecha_termino;
 
 
                form_mod.appendChild(csrf_i);
@@ -347,10 +340,10 @@ body {font-size:16px;}
             li1.innerHTML = "Curso: " + curso;
 
             var li2 = document.createElement('li');
-            li2.innerHTML = "Fecha de inicio: " + fecha_inicio;
+            li2.innerHTML = "Fecha de inicio: " + fecha_ini2;
 
             var li3 = document.createElement('li');
-            li3.innerHTML = "Fecha de termino: " + fecha_termino;
+            li3.innerHTML = "Fecha de termino: " + fecha_fin2;
 
             var par = document.createElement('p');
             par.appendChild(li1);
@@ -388,7 +381,7 @@ body {font-size:16px;}
     var arr = [{% for eval in evaluacion.evaluadores.all %}"{{ eval.email }}"{% if not forloop.last %},{% endif %}{% endfor %}];
 
 
-        create_button('{{ evaluacion.nombre }}', '{{ evaluacion.id }}', '{{ evaluacion.curso }}', '{{ evaluacion.fecha_inicio }}', '{{ evaluacion.fecha_fin }}', '{{ evaluacion.rubrica.id }}', '{{ evaluacion.estado }}', arr, '{{ evaluacion.curso.id }}');
+        create_button('{{ evaluacion.nombre }}', '{{ evaluacion.id }}', '{{ evaluacion.curso }}', '{{ evaluacion.fecha_inicio | date:"Y-m-d"}}', '{{ evaluacion.fecha_fin | date:"Y-m-d" }}', '{{ evaluacion.rubrica.id }}', '{{ evaluacion.estado }}', arr, '{{ evaluacion.curso.id }}', '{{ evaluacion.fecha_inicio | date:"d-m-Y" }}','{{ evaluacion.fecha_fin | date:"d-m-Y" }}');
     </script>
 
 {% endfor %}

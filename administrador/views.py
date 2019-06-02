@@ -78,4 +78,5 @@ def createEvaluacion(request):
                     user=User.objects.get(username=eva)
                 )
             )
+    print(evaluacion.fecha_inicio, evaluacion.fecha_fin, evaluacion.estado)
     return redirect('/a/eval/')
