@@ -123,17 +123,24 @@
         $(document).click(function (event) {
             var text = $(event.target);
             if (text.is("li") && !text.hasClass("w3-xlarge")) {
-                console.log(text.parent().children());
+
                 if (text.hasClass("selected")) {
                     text.removeClass("selected");
-                } else {
+                    var input = text.find('input')[0];
+                    input.disabled=true;
+                } else {//click on unselected option
                     var children = text.parent().children();
-                    console.log(children.length);
-                    for (var i = 0; i < children.length; i++) {
+
+                    for (var i = 1; i < children.length; i++) {
                         children[i].classList.remove("selected");
+                        children[i].getElementsByTagName("input").item(0).disabled=true;
+                        //tempInput.value=5;
                     }
 
                     text.addClass("selected");
+                    var input = text.find('input')[0];
+                    input.disabled = false;
+
                 }
             }
         });
@@ -150,11 +157,16 @@
             head.classList.add("w3-orange", "w3-xlarge", "w3-padding-32");
             head.innerHTML = lista[0];
             ul.appendChild(head);
-
+            var headerData = {{ header|safe }};
             for (var i = 1; i < lista.length; i++) {
-                console.log("aqui");
                 var li = document.createElement('li');
-                li.innerHTML = lista[i];
+                var input = document.createElement('input');
+                input.setAttribute('type','text');
+                input.disabled=true;
+
+                input.setAttribute('value',lista[i]+"*"+headerData[i]);
+                li.innerHTML = lista[i]+" - ["+headerData[i]+" pts]";
+                li.appendChild(input);
                 ul.appendChild(li);
             }
             d.appendChild(ul);
