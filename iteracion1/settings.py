@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'usuarios.apps.UsuariosConfig',
     'cursos.apps.CursosConfig',
     'evaluaciones.apps.EvaluacionesConfig',
+    'rubricas.apps.RubricasConfig',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rubricas.apps.RubricasConfig',
     'django.forms'
 ]
 

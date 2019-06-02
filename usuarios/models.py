@@ -5,14 +5,6 @@ from django.contrib.auth.models import User
 # Aca deberian estar los modelos de los distintos usuarios que tengamos
 
 
-class Administrador(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # aca deberian ir mas campos, por ahora esta lo basico
-
-    def __str__(self):
-        return self.user.username
-
-
 class Evaluador(models.Model):
     # el mail va a ser el nombre de usuario del user de django
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,3 +35,5 @@ class Evaluador(models.Model):
         verbose_name_plural = "Evaluadores"
 
 
+class Administrador(Evaluador):
+    pass
