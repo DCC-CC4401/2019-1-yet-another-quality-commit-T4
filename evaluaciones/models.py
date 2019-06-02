@@ -61,6 +61,9 @@ class EvaluacionGrupo(models.Model):
     def getFecha(self):
         return self.fecha
 
+    def __str__(self):
+        return self.grupo.nombre
+
 
 class Resultados(models.Model):
     #evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
