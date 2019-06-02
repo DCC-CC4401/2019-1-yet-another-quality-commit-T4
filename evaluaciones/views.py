@@ -19,7 +19,19 @@ def evaluacion(request):
 def evadmin(request, evaluacion_id):
     print(evaluacion_id)
     eval = Evaluacion.objects.get(id=evaluacion_id)
-    return render(request, 'Eval_interface/ficha_evaluacion.html', context=eval)
+    return render(
+        request,
+        'Eval_interface/ficha_evaluacion.html',
+        context={
+            "evaluacion": eval,
+            "evaluadores": eval.evaluadores.all(),
+            "equipos": eval.curso.equipos.all(),
+            "integrantes": {
+                equipo.nombre: equipo.estudiantes.all()
+                for equipo in eval.curso.equipos.all()
+            }
+        }
+    )
 
 def evmobile(request):
     return render(request, 'Eval_interface/evaluacionMobile.html')

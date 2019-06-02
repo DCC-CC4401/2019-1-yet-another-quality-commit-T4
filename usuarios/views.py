@@ -68,9 +68,9 @@ def evaluadores(request):
             apellido=lname,
         )
 
-    evaluadores = Evaluador.objects.order_by('-id').all()
-
-    return render(request, 'Admin_interface/Evaluadores_admin.html', context={'evaluadores': evaluadores})
+    evaluadores = Evaluador.objects.exclude(user__groups=Group.objects.get(name='administradores')).order_by('-id')
+    all_members = Evaluador.objects.all()
+    return render(request, 'Admin_interface/Evaluadores_admin.html', context={'evaluadores': evaluadores, 'all_members': all_members})
 
 def delete_evaluador(request):
     mail = request.POST.get('evaluador')

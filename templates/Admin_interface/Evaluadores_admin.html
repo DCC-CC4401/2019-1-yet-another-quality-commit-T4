@@ -222,7 +222,7 @@
 
         // validar form de agregar
         function validateEmail(form, field_name) {
-            const used_mails = [{% for eval in evaluadores %}"{{ eval.email }}",{% endfor %}];
+            const used_mails = [{% for eval in all_members %}"{{ eval.email }}",{% endfor %}];
             if (!used_mails.includes(form[field_name].value)) {
                 form.submit();
                 return true;
