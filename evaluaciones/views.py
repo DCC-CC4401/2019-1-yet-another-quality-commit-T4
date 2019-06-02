@@ -1,8 +1,10 @@
 from django.shortcuts import render
-
+import json
 # Create your views here.
 def evaluacion(request):
-    return render(request, 'Eval_interface/evaluacion.html')
+    ll = [["Aspecto","hola","hola"],["Aspecto2", "chao", "chao"]]
+    data = json.dumps(ll)
+    return render(request, 'Eval_interface/evaluacion.html', context={'data':data})
 
 def evadmin(request):
     return render(request, 'Eval_interface/ficha_evaluacion.html')
