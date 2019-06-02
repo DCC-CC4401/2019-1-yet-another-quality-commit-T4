@@ -2,7 +2,10 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import Group, User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-
+from evaluaciones.models import Evaluacion
+from usuarios.models import Evaluador
+from cursos.models import Curso
+from rubricas.models import Rubrica
 
 from usuarios.models import Evaluador
 from django.utils.crypto import get_random_string
@@ -26,6 +29,8 @@ def process_login(request):
 
                 return redirect('administrador:landing')
             # aca deberian ir mas ifs para los evaluadores
+            elif Group.objects.get(name='evaluadores') in user.groups.all():
+                return redirect('../e/lp/')
             else:
                 return render(request, 'usuarios/login.html', {
                     'error_message': "Por ahora solo soporto admins",
@@ -97,3 +102,30 @@ def modify_evaluador(request):
     return redirect('/a/ev/')
 
 
+def eval_loged(request):
+    mail = request.user.get_username()
+    d_user = User.objects.get(username=mail)
+    evaluador = Evaluador.objects.get(user=d_user)
+    print(evaluador.email)
+    evaluaciones_ = Evaluacion.objects.filter(evaluadores=evaluador).order_by('-id')[:10]
+    evaluadores_ = Evaluador.objects.all()
+    cursos = Curso.objects.order_by('-id').all()
+    rubricas = Rubrica.objects.order_by('-id').all()
+    return render(request, 'Evaluador_interface/Landing_page_evaluador.html',
+                  context={'evaluaciones': evaluaciones_, 'evaluadores': evaluadores_, 'cursos': cursos,
+                           'rubricas': rubricas})
+
+
+
+def evaluaciones_evaluador(request):
+    mail = request.user.get_username()
+    d_user = User.objects.get(username=mail)
+    evaluador = Evaluador.objects.get(user=d_user)
+    print(evaluador.email)
+    evaluaciones_ = Evaluacion.objects.filter(evaluadores=evaluador).order_by('-id')
+    evaluadores_ = Evaluador.objects.all()
+    cursos = Curso.objects.order_by('-id').all()
+    rubricas = Rubrica.objects.order_by('-id').all()
+    return render(request, 'Evaluador_interface/evaluacion_evaluador.html',
+                  context={'evaluaciones': evaluaciones_, 'evaluadores': evaluadores_, 'cursos': cursos,
+                           'rubricas': rubricas})
