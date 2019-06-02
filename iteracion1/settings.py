@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'usuarios.apps.UsuariosConfig',
     'cursos.apps.CursosConfig',
     'evaluaciones.apps.EvaluacionesConfig',
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rubricas.apps.RubricasConfig',
+    'django.forms'
 ]
 
 MIDDLEWARE = [
