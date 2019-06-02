@@ -57,17 +57,17 @@ body {font-size:16px;}
       <span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
       <form method="POST" action="create/" style="padding: 20px 20px 60px 20px">
         {% csrf_token %}
-        Nombre: <input type="text" name="nombre" required> <br> <br>
+        Nombre: <input type="text" name="nombre" required required> <br> <br>
         Curso:
-          <select name = 'curso'>
+          <select name = 'curso' required>
               {% for curso in cursos %}
                     <option value="{{curso.nombre}}">{{curso.nombre}}</option>
               {% endfor %}
           </select><br> <br>
-        Fecha de inicio: <input type="date" name="fecha_ini" value="2017-06-01"> <br> <br>
-        Fecha de término: <input type="date" name="fecha_fin" value="2017-06-01"> <br> <br>
+        Fecha de inicio: <input type="date" name="fecha_ini" value="2017-06-01" required> <br> <br>
+        Fecha de término: <input type="date" name="fecha_fin" value="2017-06-01" required> <br> <br>
         Rúbrica:
-          <select name="rubrica">
+          <select name="rubrica" required>
               {% for rubrica in rubricas %}
                     <option value="{{rubrica.nombre}}">{{rubrica.nombre}} </option>
               {% endfor %}
@@ -119,6 +119,8 @@ body {font-size:16px;}
             rubrica_form.appendChild(rubrica_input);
             rubrica_form.appendChild(button_1);
 
+
+
             var button_2 = document.createElement('button');
             button_2.className = "w3-button w3-white w3-border w3-border-red w3-round-large";
             button_2.innerHTML = 'Exportar puntajes';
@@ -137,6 +139,10 @@ body {font-size:16px;}
             the_span.className = "w3-button w3-xlarge w3-transparent w3-display-topright";
             the_span.id = "close_" + id;
             the_span.innerHTML = "×";
+
+
+
+
             /*COSAS*/
 
                 var div2_mod = document.createElement('div');
@@ -144,8 +150,7 @@ body {font-size:16px;}
                 div2_mod.style.maxWidth="600px";
                 div2_mod.appendChild(the_span);
 
-                //var span = document.createElement('span');
-                //span.onclick = document.getElementById('modificar').style.display='none';
+
 
                 var form_mod = document.createElement('form');
                 form_mod.method = 'POST';
@@ -158,6 +163,7 @@ body {font-size:16px;}
                 csrf_i.value = '{{ csrf_token }}';
 
                 var name_mod = document.createElement('input');
+                name_mod.required=true;
                 name_mod.type ="text";
                 name_mod.name = "nombre";
                 name_mod.value = nombre;
@@ -184,6 +190,7 @@ body {font-size:16px;}
 
 
                 var curso_mod = document.createElement('select');
+                curso_mod.required=true;
                 curso_mod.name="curso";
                {% for curso in cursos %}
                 var cur = document.createElement('option');
@@ -198,6 +205,7 @@ body {font-size:16px;}
 
 
                var fecha_ini_mod = document.createElement('input');
+               fecha_ini_mod.required=true;
                fecha_ini_mod.type="date";
                fecha_ini_mod.name="fecha_ini";
                fecha_ini_mod.value=fecha_inicio;
@@ -205,6 +213,7 @@ body {font-size:16px;}
 
 
                var fecha_fin_mod = document.createElement('input');
+               fecha_fin_mod.required=true;
                fecha_fin_mod.type="date";
                fecha_fin_mod.name="fecha_fin";
                fecha_fin_mod.value=fecha_termino;
@@ -232,6 +241,7 @@ body {font-size:16px;}
 
 
                var rub_mod = document.createElement('select');
+               rub_mod.required=true;
                rub_mod.name="rubrica";
                {% for rubrica in rubricas %}
 
@@ -246,7 +256,6 @@ body {font-size:16px;}
                 form_mod.appendChild(rub_label);
                 form_mod.appendChild(rub_mod);
 
-            var evals = [{% for eval in evaluadores %}"{{ eval.email }}"{% if not forloop.last %},{% endif %}{% endfor %}];
 
             form_mod.appendChild(document.createElement('br'));
             form_mod.appendChild(document.createElement('br'));
@@ -365,9 +374,7 @@ body {font-size:16px;}
             document.getElementById("main_content").appendChild(div);
             document.body.appendChild(div_mod);
             the_span.onclick = function(){
-                console.log("gfeuydifderg");
-                document.getElementById("modificar_"+nombre).style.display = 'none';
-                //NOFUNCIONAELBOTONNOSEPQUWU
+                window.location.href = "../../a/eval"
                 }
 
 

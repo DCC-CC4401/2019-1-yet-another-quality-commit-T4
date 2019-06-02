@@ -13,10 +13,10 @@ def rubricas(request):
     return render(request, 'Admin_interface/Rubricas_admin.html')
 
 def evaluaciones(request):
-    evaluaciones_ = Evaluacion.objects.all()
-    evaluadores = Evaluador.objects.all()
-    cursos = Curso.objects.all()
-    rubricas = Rubrica.objects.all()
+    evaluaciones_ = Evaluacion.objects.order_by('-id').all()
+    evaluadores = Evaluador.objects.order_by('-id').all()
+    cursos = Curso.objects.order_by('-id').all()
+    rubricas = Rubrica.objects.order_by('-id').all()
     return render(request, 'Admin_interface/Evaluaciones_admin.html', context={'evaluaciones': evaluaciones_, 'evaluadores': evaluadores, 'cursos': cursos, 'rubricas': rubricas})
 
 def deleteEvaluacion(request):
