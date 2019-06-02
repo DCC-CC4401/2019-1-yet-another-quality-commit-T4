@@ -4,7 +4,7 @@ from rubricas.processor import readCSV as reader
 from rubricas.models import Rubrica as R
 # Create your views here.
 def evaluacion(request):
-    name="prueba"
+    name="prueba2"
     r = R.objects.filter(nombre=name).first()
     lista = reader(r)
     lista.pop(0)
