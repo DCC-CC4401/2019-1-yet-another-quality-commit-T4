@@ -51,11 +51,11 @@
     <!-- Photo grid (modal) -->
 
     <!-- Evaluacion -->
-    <div class="w3-container" id="designers" style="margin-top:50px">
+    <div class="w3-container" id="rubrica" style="margin-top:50px">
         <h1 class="w3-xxxlarge w3-text-red"><b>Evaluación <i class="w3-text-green">en curso</i> </b></h1>
         <hr style="width:50px;border:5px solid red" class="w3-round">
         <div class="w3-container w3-center">
-            <p><b>Lambda-Ideas</b> Presentación Tarea 2 <i>CC4401-1/Otoño/2019</i></p>
+            <p><b><span id="grupo">{{grupo}}</span> </b> <span id="evaluacion">{{evaluacion}}</span> <span id="curso"><i>{{curso}}</i></span></p>
             <p>Seleccione el nivel de logro alcanzado por el grupo en cada ámbito</p>
         </div>
 
@@ -88,10 +88,14 @@
 
     <div class="w3-panel w3-right w3-half">
         <button class="w3-button w3-xlarge w3-red" style="margin-left: 15%"
-                onclick="location.href='postevaluacion.html'"><i class="fas fa-envelope-open-text"></i> Entregar
+                onclick="makeForm()"><i class="fas fa-envelope-open-text"></i> Entregar
             evaluación
         </button>
     </div>
+
+    <form id="myForm" style="display: none;">
+        {% csrf_token %}
+    </form>
 
 
 
@@ -148,7 +152,7 @@
         function addAspect(lista) {
             //var data = {{ data|safe }};
 
-            var parent = document.getElementById('designers');
+            var parent = document.getElementById('rubrica');
             var d = document.createElement('DIV');
             d.classList.add("w3-panel", "w3-margin-bottom");
             var ul = document.createElement('ul');
@@ -161,11 +165,11 @@
             for (var i = 1; i < lista.length; i++) {
                 var li = document.createElement('li');
                 var input = document.createElement('input');
-                input.setAttribute('type','text');
+                input.setAttribute('type','hidden');
                 input.disabled=true;
 
-                input.setAttribute('value',lista[i]+"*"+headerData[i]);
-                li.innerHTML = lista[i]+" - ["+headerData[i]+" pts]";
+                input.setAttribute('value',lista[0]+"*" + lista[i]+"*"+headerData[i]);
+                li.innerHTML = lista[i] + "  ["+headerData[i]+" pts]";
                 li.appendChild(input);
                 ul.appendChild(li);
             }
@@ -185,6 +189,88 @@
             fill(data);
         }
         compileRubric();
+
+
+    </script>
+    <script>
+        function makeForm(){
+            var inputs = document.getElementsByTagName('input');
+            var pje = "";
+
+
+            for(var i=0; i<inputs.length-1;i++){
+                if(inputs[i].disabled==false){
+                    pje+=inputs[i].value+"#";
+                }
+            }
+            pje = pje.slice(0,pje.length-1);
+
+            var curso = document.getElementById('curso').innerText;
+            var grupo = {{grupo.id}};
+            var evaluacion = document.getElementById('evaluacion').innerText;
+
+            var data = {{data|safe}};
+            var n_aspectos = data.length;
+
+            var n_inputs = pje.split("#").length;
+            console.log(n_inputs);
+            if(n_inputs!=n_aspectos){
+                alert('No has completado la evaluación');
+                return;
+            }
+
+            var form = document.getElementById('myForm');
+            var inputCurso = document.createElement('input');
+            var inputGrupo = document.createElement('input');
+            var inputEvaluacion = document.createElement('input');
+            var inputPje = document.createElement('input');
+            var inputEvaluador = document.createElement('input');
+            var inputPresentador = document.createElement('input');
+
+
+
+            inputCurso.setAttribute('name','curso');
+            inputCurso.setAttribute('type','text');
+            inputCurso.value=curso;
+
+            inputGrupo.setAttribute('name','grupo');
+            inputGrupo.setAttribute('type','text');
+            inputGrupo.value=grupo;
+
+            inputEvaluacion.setAttribute('name','evaluacion');
+            inputEvaluacion.setAttribute('type','text');
+            inputEvaluacion.value={{evaluacion.id}};
+
+            inputEvaluador.setAttribute('name','evaluador');
+            inputEvaluador.setAttribute('type','text');
+            var email = {{evaluador.id}};
+            inputEvaluador.value=email.toString();
+
+            inputPresentador.setAttribute('name','presentador');
+            inputPresentador.setAttribute('type','text');
+            inputPresentador.value={{estudiante.id}};
+
+            inputPje.setAttribute('name','puntaje');
+            inputPje.setAttribute('type','text');
+            inputPje.value=pje;
+
+
+
+            form.appendChild(inputCurso);
+            form.appendChild(inputGrupo);
+            form.appendChild(inputEvaluacion);
+            form.appendChild(inputEvaluador);
+            form.appendChild(inputPresentador);
+            form.appendChild(inputPje);
+            form.setAttribute('method','post');
+            form.setAttribute('action','data');
+
+            form.submit();
+
+
+
+
+        }
 
     </script>
 
