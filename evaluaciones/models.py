@@ -4,6 +4,8 @@ from cursos.models import Curso, Equipo
 from rubricas.models import Rubrica
 from usuarios.models import Evaluador
 from datetime import datetime
+from cursos.models import Equipo, Estudiante
+
 
 # Create your models here.
 
@@ -32,8 +34,32 @@ class Evaluacion(models.Model):
         unique_together = [['curso', 'nombre']]
 
 
+
 class Resultados(models.Model):
-    evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
-    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
-    Directory = models.CharField(default='/evaluaciones/storage/', max_length=60)
-    release_date = models.DateTimeField(default=datetime.now)
+    #evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
+    #equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    #Directory = models.CharField(default='/evaluaciones/storage/', max_length=60)
+    #release_date = models.DateTimeField(default=datetime.now)
+    evaluador = models.ForeignKey(Evaluador,on_delete=models.CASCADE)
+    puntaje = models.CharField(max_length=100)
+
+    def getEvaluador(self):
+        return self.evaluador
+    def getPuntaje(self):
+        return self.puntaje
+
+class EvaluacionGrupo(models.Model):
+    grupo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    presentador = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
+    resultados = models.ManyToManyField(Resultados)
+    fecha = models.DateField()
+
+    def getGrupo(self):
+        return self.grupo
+    def getPresentador(self):
+        return self.presentador
+    def getResultados(self):
+        return self.resultados
+    def getFecha(self):
+        return self.fecha
+
