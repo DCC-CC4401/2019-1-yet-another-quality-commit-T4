@@ -1,45 +1,10 @@
-<!DOCTYPE html>
-< lang="es">
+{% extends "real_templates/barra_navegacion.html" %}
+{% block title %}
 <title>Plataforma de evaluación-Evaluaciones</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
-.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
-.w3-half img:hover{opacity:1}
-</style>
-
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-    <!--Profile image -->
-  <div class="w3-container">
-      <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:200px;width:200px" alt="Avatar"></p>
-    <h3 class="w3-padding-64"><center><b>Usuario</b></center></h3>
-  </div>
-  <div class="w3-bar-block">
-    <a href="/a/lp" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
-    <a href="#cursos" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Cursos</a>
-    <a href="/a/ev" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluadores</a>
-      <a href="/a/rub" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Rúbricas</a>
-    <a href="/a/eval" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Evaluaciones</a>
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contact</a>
-  </div>
-</nav>
-
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
-  <span>Usuario</span>
-</header>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block content %}
 <!-- !PAGE CONTENT! -->
 <div id="main_content" class="w3-main" style="margin-left:340px;margin-right:40px">
   <!-- Portada -->
@@ -57,17 +22,17 @@ body {font-size:16px;}
       <span onclick="document.getElementById('agregar').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
       <form method="POST" action="create/" style="padding: 20px 20px 60px 20px">
         {% csrf_token %}
-        Nombre: <input type="text" name="nombre" required> <br> <br>
+        Nombre: <input type="text" name="nombre" required required> <br> <br>
         Curso:
-          <select name = 'curso'>
+          <select name = 'curso' required>
               {% for curso in cursos %}
                     <option value="{{curso.id}}">{{curso.nombre}}</option>
               {% endfor %}
           </select><br> <br>
-        Fecha de inicio: <input type="datetime-local" name="fecha_ini" value="2018-06-12T19:30"> <br> <br>
-        Fecha de término: <input type="datetime-local" name="fecha_fin" value="2018-06-12T19:30"> <br> <br>
+        Fecha de inicio: <input type="date" name="fecha_ini" value="2017-06-01" required> <br> <br>
+        Fecha de término: <input type="date" name="fecha_fin" value="2017-06-01" required> <br> <br>
         Rúbrica:
-          <select name="rubrica">
+          <select name="rubrica" required>
               {% for rubrica in rubricas %}
                     <option value="{{rubrica.id}}">{{rubrica.nombre}} </option>
               {% endfor %}
@@ -83,7 +48,7 @@ body {font-size:16px;}
 </div>
     <!--Seccion rubricas-->
     <script>
-        function create_button(nombre, id, curso, fecha_inicio, fecha_termino, id_rubrica, estado, mis_evals, id_curso){
+        function create_button(nombre, id, curso, fecha_inicio, fecha_termino, id_rubrica, estado, mis_evals, id_curso, fecha_ini2, fecha_fin2){
             var super_button = document.createElement('button');
             super_button.onclick = function(){
                 var x = document.getElementById(id);
@@ -119,6 +84,8 @@ body {font-size:16px;}
             rubrica_form.appendChild(rubrica_input);
             rubrica_form.appendChild(button_1);
 
+
+
             var button_2 = document.createElement('button');
             button_2.className = "w3-button w3-white w3-border w3-border-red w3-round-large";
             button_2.innerHTML = 'Exportar puntajes';
@@ -144,17 +111,12 @@ body {font-size:16px;}
 
             /*COSAS*/
 
-
-
-
-
                 var div2_mod = document.createElement('div');
                 div2_mod.className="w3-modal-content w3-card-4 w3-animate-zoom";
                 div2_mod.style.maxWidth="600px";
                 div2_mod.appendChild(the_span);
 
-                //var span = document.createElement('span');
-                //span.onclick = document.getElementById('modificar').style.display='none';
+
 
                 var form_mod = document.createElement('form');
                 form_mod.method = 'POST';
@@ -167,6 +129,7 @@ body {font-size:16px;}
                 csrf_i.value = '{{ csrf_token }}';
 
                 var name_mod = document.createElement('input');
+                name_mod.required=true;
                 name_mod.type ="text";
                 name_mod.name = "nombre";
                 name_mod.value = nombre;
@@ -193,6 +156,7 @@ body {font-size:16px;}
 
 
                 var curso_mod = document.createElement('select');
+                curso_mod.required=true;
                 curso_mod.name="curso";
                {% for curso in cursos %}
                 var cur = document.createElement('option');
@@ -207,15 +171,18 @@ body {font-size:16px;}
 
 
                var fecha_ini_mod = document.createElement('input');
-               fecha_ini_mod.type="datetime-local";
+               fecha_ini_mod.required=true;
+               fecha_ini_mod.type="date";
                fecha_ini_mod.name="fecha_ini";
-                console.log(fecha_inicio);
                fecha_ini_mod.value=fecha_inicio;
+               console.log(fecha_ini_mod.valueAsDate);
 
 
                var fecha_fin_mod = document.createElement('input');
-               fecha_fin_mod.type="datetime-local";
+               fecha_fin_mod.required=true;
+               fecha_fin_mod.type="date";
                fecha_fin_mod.name="fecha_fin";
+               fecha_fin_mod.value=fecha_termino;
 
 
                form_mod.appendChild(csrf_i);
@@ -240,6 +207,7 @@ body {font-size:16px;}
 
 
                var rub_mod = document.createElement('select');
+               rub_mod.required=true;
                rub_mod.name="rubrica";
                {% for rubrica in rubricas %}
 
@@ -254,7 +222,6 @@ body {font-size:16px;}
                 form_mod.appendChild(rub_label);
                 form_mod.appendChild(rub_mod);
 
-            var evals = [{% for eval in evaluadores %}"{{ eval.email }}"{% if not forloop.last %},{% endif %}{% endfor %}];
 
             form_mod.appendChild(document.createElement('br'));
             form_mod.appendChild(document.createElement('br'));
@@ -348,10 +315,10 @@ body {font-size:16px;}
             li1.innerHTML = "Curso: " + curso;
 
             var li2 = document.createElement('li');
-            li2.innerHTML = "Fecha de inicio: " + fecha_inicio;
+            li2.innerHTML = "Fecha de inicio: " + fecha_ini2;
 
             var li3 = document.createElement('li');
-            li3.innerHTML = "Fecha de termino: " + fecha_termino;
+            li3.innerHTML = "Fecha de termino: " + fecha_fin2;
 
             var par = document.createElement('p');
             par.appendChild(li1);
@@ -373,9 +340,7 @@ body {font-size:16px;}
             document.getElementById("main_content").appendChild(div);
             document.body.appendChild(div_mod);
             the_span.onclick = function(){
-                console.log("gfeuydifderg");
-                document.getElementById("modificar_"+nombre).style.display = 'none';
-                //NOFUNCIONAELBOTONNOSEPQUWU
+                window.location.href = "../../a/eval"
                 }
 
 
@@ -389,7 +354,7 @@ body {font-size:16px;}
     var arr = [{% for eval in evaluacion.evaluadores.all %}"{{ eval.email }}"{% if not forloop.last %},{% endif %}{% endfor %}];
 
 
-        create_button('{{ evaluacion.nombre }}', '{{ evaluacion.id }}', '{{ evaluacion.curso }}', '{{ evaluacion.fecha_inicio }}', '{{ evaluacion.fecha_fin }}', '{{ evaluacion.rubrica.id }}', '{{ evaluacion.estado }}', arr, '{{ evaluacion.curso.id }}');
+        create_button('{{ evaluacion.nombre }}', '{{ evaluacion.id }}', '{{ evaluacion.curso }}', '{{ evaluacion.fecha_inicio | date:"Y-m-d"}}', '{{ evaluacion.fecha_fin | date:"Y-m-d" }}', '{{ evaluacion.rubrica.id }}', '{{ evaluacion.estado }}', arr, '{{ evaluacion.curso.id }}', '{{ evaluacion.fecha_inicio | date:"d-m-Y" }}','{{ evaluacion.fecha_fin | date:"d-m-Y" }}');
     </script>
 
 {% endfor %}
@@ -406,5 +371,4 @@ function myFunction(id) {
   }
 }
 </script>
-</body>
-</html>
+{% endblock %}
