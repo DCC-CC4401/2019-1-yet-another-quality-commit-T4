@@ -226,3 +226,7 @@ fabric.properties
 
 # los csv
 */storage/*.csv
+
+
+# pico con las migraciones
+*/migrations/*
