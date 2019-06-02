@@ -26,6 +26,9 @@ class Evaluacion(models.Model):
     rubrica = models.ForeignKey(Rubrica, on_delete=models.CASCADE, default=None)
     evaluadores = models.ManyToManyField(Evaluador)
 
+
+
+
     def __str__(self):
         return self.nombre
 
@@ -34,24 +37,10 @@ class Evaluacion(models.Model):
         unique_together = [['curso', 'nombre']]
 
 
-
-class Resultados(models.Model):
-    #evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
-    #equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
-    #Directory = models.CharField(default='/evaluaciones/storage/', max_length=60)
-    #release_date = models.DateTimeField(default=datetime.now)
-    evaluador = models.ForeignKey(Evaluador,on_delete=models.CASCADE)
-    puntaje = models.CharField(max_length=100)
-
-    def getEvaluador(self):
-        return self.evaluador
-    def getPuntaje(self):
-        return self.puntaje
-
 class EvaluacionGrupo(models.Model):
     grupo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
     presentador = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
-    resultados = models.ManyToManyField(Resultados)
+    evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
     fecha = models.DateField()
 
     def getGrupo(self):
@@ -62,4 +51,21 @@ class EvaluacionGrupo(models.Model):
         return self.resultados
     def getFecha(self):
         return self.fecha
+
+
+class Resultados(models.Model):
+    #evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
+    #equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    #Directory = models.CharField(default='/evaluaciones/storage/', max_length=60)
+    #release_date = models.DateTimeField(default=datetime.now)
+    evaluador = models.ForeignKey(Evaluador, on_delete=models.CASCADE)
+    puntaje = models.CharField(max_length=100)
+    evaluacion_grupo = models.ForeignKey(EvaluacionGrupo, on_delete=models.CASCADE)
+
+    def getEvaluador(self):
+        return self.evaluador
+    def getPuntaje(self):
+        return self.puntaje
+
+
 
