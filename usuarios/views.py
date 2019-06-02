@@ -147,7 +147,6 @@ def modifyEvaluacion(request):
     return redirect('/a/eval/')
 
 def createEvaluacion(request):
- #   # TODO: poner la llave real de curso y rubrica
     if request.method == 'POST':
         print('se viene el POST!!: ', request.POST)
         evaluadores = request.POST.getlist('evals')
@@ -156,9 +155,9 @@ def createEvaluacion(request):
         rub = request.POST.get('rubrica')
         nombre = request.POST.get('nombre')
         print(type(request.POST.get('curso')))
-        curso = Curso.objects.filter(nombre=request.POST.get('curso')).get()
+        curso = Curso.objects.filter(id=request.POST.get('curso')).get()
         print(curso.id)
-        rubrica = Rubrica.objects.filter(nombre=rub).get()
+        rubrica = Rubrica.objects.filter(id=rub).get()
         evaluacion = Evaluacion.objects.create(
             nombre=nombre,
             fecha_inicio=fecha_ini,
