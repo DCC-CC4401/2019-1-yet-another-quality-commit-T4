@@ -84,7 +84,7 @@
 
 
     </div>
-           
+
 
     <div class="w3-panel w3-right w3-half">
         <button class="w3-button w3-xlarge w3-red" style="margin-left: 15%"
@@ -93,11 +93,11 @@
         </button>
     </div>
 
-
-
     <form id="myForm" style="display: none;">
         {% csrf_token %}
     </form>
+
+
 
     <!-- End page content -->
     </div>
@@ -264,7 +264,7 @@
             form.appendChild(inputPresentador);
             form.appendChild(inputPje);
             form.setAttribute('method','post');
-            form.setAttribute('action', "{% url 'evaluaciones:process_result' %}");
+            form.setAttribute('action', "{% url 'evaluaciones:process_result_evaluador' %}");
 
             form.submit();
 

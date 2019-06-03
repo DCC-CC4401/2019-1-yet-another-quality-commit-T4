@@ -34,7 +34,6 @@ def make(p):
         wr = csv.writer(file, quoting=csv.QUOTE_ALL)
         # wr.writerow([p['0,0'],p['0,1'],p['0,2']])
         for list_row in list:
-            print(list_row)
             wr.writerow(list_row)
 
 def readCSV(o : R):
@@ -44,7 +43,6 @@ def readCSV(o : R):
         r = csv.reader(f)
         for row in r:
             l.append(row)
-            print(row)
     return l
 
 def justMakeFile(p):

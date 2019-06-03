@@ -28,6 +28,7 @@
     }
 {% endblock %}
 {% block content %}
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
         <h1 class="w3-xxxlarge w3-text-red" style="margin: 2%;"><b>Ficha de rúbrica</b></h1>
     {% if rub != None %}
     <h2 class="w3-xxlarge w3-text-red" style="margin: 2%;"><b>"{{ rub }}"</b></h2>
@@ -249,7 +250,7 @@
         </body>
     {% endif %}
         <!-- End page content -->
-
+    </div>
         <!-- W3.CSS Container -->
         <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
             <p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p>
@@ -263,7 +264,7 @@
                     return;
                 }
                 compileForm();
-                
+
                 var min_duration = document.getElementById("min_duration").value;
                 var max_duration = document.getElementById("max_duration").value;
 
@@ -271,7 +272,7 @@
                     alert("no has seleccionado duraciones");
                     return;
                 }
-                
+
                 var f = document.getElementById("myForm");
 
                 f.submit();
@@ -285,7 +286,7 @@
                 var table = document.getElementById("rubric");
                 var rows = table.rows;
                 var width = getColls();
-                
+
                 var suma = 0;
                 for(var r = 1; r<table.rows.length;r++){
                     var index = 0;

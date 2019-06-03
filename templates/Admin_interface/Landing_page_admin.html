@@ -2,13 +2,48 @@
 {% block title %}
 <title>Plataforma de evaluación</title>
 {% endblock %}
+{% block styles %}
+
+.hero__image .carousel-caption{
+  postion:relative;
+  top:35%;
+  color: #ffffff;
+}
+.hero__image {
+/* Sizing */
+width: 100vw;
+height: 80vh;
+
+/* Flexbox stuff */
+display: flex;
+justify-content: center;
+align-items: center;
+
+/* Text styles */
+text-align: center;
+
+/* Background styles */
+background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('/media/cover1.jpg');
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+{% endblock %}
 
 {% block content %}
-  <!-- Portada -->
-  <div class="w3-container" id="portada" style="margin-top:300px; margin-bottom:300px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Bienvenido al sistema de evaluación</b></h1>
-    <hr style="width:50px;border:5px solid red" class="w3-round">
-      <p><h3>Seleccione alguna sección para comenzar</h3></p>
-     <i class="far fa-arrow-alt-circle-left" style="font-size:300%"></i>
-  </div>
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+    <!-- Portada -->
+    <div class="hero__image">
+        <div class="carousel-caption">
+            <h1>I see this as an absolute win!</h1>
+        </div>
+    </div>
+
+        <h1 class="w3-xxxlarge w3-text-red"><b>Bienvenido al sistema de evaluación</b></h1>
+        <hr style="width:50px;border:5px solid red" class="w3-round">
+        <p>
+        <h3>Seleccione alguna sección para comenzar</h3></p>
+
+</div>
 {% endblock %}
