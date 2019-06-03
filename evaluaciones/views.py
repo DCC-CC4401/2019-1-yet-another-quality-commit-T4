@@ -12,21 +12,18 @@ from usuarios.models import Evaluador
 import time
 
 # Create your views here.
-def evaluacion(request):
-
-    if request.method=='POST':
-        evaluacion = Evaluacion.objects.filter(id=request.POST['idEvaluacion'])
-        presentador = Estudiante.objects.filter(id=request.POST['idPresentador'])
-        equipo = Equipo.objects.filter(id=request.POST['idEquipo'])
-        evaluador = Evaluador.objects.filter(id=request.POST['idEvaluador'])
-    name = "prueba3"
-    r = R.objects.filter(nombre=name).get()
-    estudiante = Estudiante.objects.filter(nombre="1").get()
-    grupo = Equipo.objects.filter(nombre="Equipo1").get()
-    evaluador = Evaluador.objects.filter(nombre='luis').first()
+def evaluacion(request, evaluacion_id, equipo_id, estudiante_id):
+    print(evaluacion_id, equipo_id, estudiante_id)
+    evaluacion = Evaluacion.objects.get(id=evaluacion_id)
+    r = evaluacion.rubrica
+    estudiante = Estudiante.objects.get(id=estudiante_id)
+    equipo = Equipo.objects.get(id=equipo_id)
+    d_user = request.user
+    evaluador = Evaluador.objects.get(user=d_user)
     print(evaluador.email)
-    curso = Curso.objects.filter(nombre='curso').get()
-    evaluacion = Evaluacion.objects.filter(nombre='Evaluacion').first()
+    curso = evaluacion.curso
+
+    print(evaluacion, r, estudiante, equipo, evaluador)
 
     data = reader(r)
     header = reader(r)[0]
@@ -35,13 +32,13 @@ def evaluacion(request):
     header = json.dumps(header)
 
     return render(request, 'Eval_interface/evaluacion.html',
-                  context={'data':data,
-                           'header':header,
-                           'grupo':grupo,
-                           'estudiante':estudiante,
-                           'evaluador':evaluador,
-                           'curso':curso,
-                            'evaluacion':evaluacion}
+                  context={'data' : data,
+                           'header' : header,
+                           'grupo' : equipo,
+                           'estudiante' : estudiante,
+                           'evaluador' : evaluador,
+                           'curso' : curso,
+                            'evaluacion' : evaluacion}
                   )
 def postevresult(request):
     p = request.POST

@@ -1,6 +1,6 @@
 {% extends "real_templates/barra_navegacion.html" %}
 {% block title %}
-    <title>Ingeniería de Software</title>
+<title>Ingeniería de Software</title>
 {% endblock %}
 {% block styles %}
     body,
@@ -9,30 +9,30 @@
     h3,
     h4,
     h5 {
-    font-family: "Poppins", sans-serif
+        font-family: "Poppins", sans-serif
     }
 
     body {
-    font-size: 16px;
+        font-size: 16px;
     }
 
     .w3-half img {
-    margin-bottom: -6px;
-    margin-top: 16px;
-    opacity: 0.8;
-    cursor: pointer
+        margin-bottom: -6px;
+        margin-top: 16px;
+        opacity: 0.8;
+        cursor: pointer
     }
 
     .w3-half img:hover {
-    opacity: 1
+        opacity: 1
     }
 {% endblock %}
 {% block content %}
     <div class="w3-main" style="margin-left:340px;margin-right:40px">
         <h1 class="w3-xxxlarge w3-text-red" style="margin: 2%;"><b>Ficha de rúbrica</b></h1>
-        {% if rub != None %}
-            <h2 class="w3-xxlarge w3-text-red" style="margin: 2%;"><b>"{{ rub }}"</b></h2>
-        {% endif %}
+    {% if rub != None %}
+    <h2 class="w3-xxlarge w3-text-red" style="margin: 2%;"><b>"{{ rub }}"</b></h2>
+    {% endif %}
 
         <!DOCTYPE html>
         <div class="w3-row w3-container">
@@ -66,7 +66,7 @@
                 </head>
 
                 <body>
-                <!-- <button class="button2 button2">Título de la rúbrica  <i class="fas fa-edit"></i></button><br> -->
+                    <!-- <button class="button2 button2">Título de la rúbrica  <i class="fas fa-edit"></i></button><br> -->
                 </body>
             </div>
 
@@ -138,45 +138,38 @@
         </head>
 
         <body>
-        <form id="myForm" action="data" method="post" onkeydown="return event.key != 'Enter';">
-            <input id="n_cols" name="n_cols" type="hidden">
-            <input id="n_rows" name="n_rows" type="hidden">
+            <form id="myForm" action="data" method="post" onkeydown="return event.key != 'Enter';">
+                <input id = "n_cols" name="n_cols" type="hidden">
+                <input id = "n_rows" name="n_rows" type="hidden">
 
 
-            <label>Duración Mínima (minutos)</label>
-            <input type="number" {% if min_duration != None %} value="{{ min_duration }}" {% endif %}
-                   placeholder="Ej: 7" required id="min_duration" name="min_duration">
-            <label>Duración Máxima (minutos)</label>
-            <input type="number" {% if max_duration != None %} value="{{ max_duration }}" {% endif %}
-                   placeholder="Ej: 10" required id="max_duration" name="max_duration">
-            {% csrf_token %}
+                <label>Duración Mínima (minutos)</label>
+                <input type="number" {% if min_duration != None %} value="{{ min_duration }}" {% endif %} placeholder="Ej: 7" required id="min_duration" name="min_duration">
+                <label>Duración Máxima (minutos)</label>
+                <input type="number" {% if max_duration != None %} value="{{ max_duration }}" {% endif %} placeholder="Ej: 10" required id="max_duration" name="max_duration">
+                {% csrf_token %}
 
-            <table class="defaultTable sar-table" style="overflow: scroll;" id="rubric">
-                <tr>
-                    <th>
-                        <input type="text" name="" class="form-control" id="inputnombrerubrica"
-                               placeholder="Nombre de rubrica"/>
-                    </th>
-                    <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true"
-                                                    onclick="deleteCol(this)"></i></span>
-                        <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje"/>
-                        <!--Asignar puntajes    <i class="fas fa-edit"></i> --></th>
-                    <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true"
-                                                    onclick="deleteCol(this)"></i></span>
-                        <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje"/>
-                    </th>
-                    <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true"
-                                                    onclick="deleteCol(this)"></i></span>
-                        <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje"/>
-                    </th>
-                    <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true"
-                                                    onclick="deleteCol(this)"></i></span>
-                        <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje"/>
-                    </th>
-                </tr>
-            </table>
+                <table class="defaultTable sar-table" style="overflow: scroll;" id="rubric">
+                    <tr>
+                        <th>
+                            <input type="text" name="" class="form-control" id="inputnombrerubrica"  placeholder="Nombre de rubrica"/>
+                        </th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="deleteCol(this)"></i></span>
+                            <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje" />
+                            <!--Asignar puntajes    <i class="fas fa-edit"></i> --></th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="deleteCol(this)"></i></span>
+                            <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje" />
+                        </th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="deleteCol(this)"></i></span>
+                            <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje" />
+                        </th>
+                        <th><span style="color:red;"><i class="fa fa-trash delete-col" aria-hidden="true" onclick="deleteCol(this)"></i></span>
+                            <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje" />
+                        </th>
+                    </tr>
+                </table>
 
-        </form>
+            </form>
 
         </body>
         <div>
@@ -216,13 +209,13 @@
                 </style>
             </head>
             {% if readonly == None %}
-                <body>
+            <body>
                 <div class="btn-group">
                     <button class="button" onclick="addRow()">Agregar fila <i class="fas fa-plus"></i></button>
                     <button class="button" onclick="addColumn()">Agregar columna <i class="fas fa-plus"></i></button>
 
                 </div>
-                </body>
+            </body>
             {% endif %}
         </div>
 
@@ -251,23 +244,22 @@
             </style>
         </head>
 
-        {% if readonly == None %}
-            <body>
+    {% if readonly == None %}
+        <body>
             <button class="button1 button1" onclick="submitForm()">Guardar rúbrica <i class="far fa-save"></i></button>
-            </body>
-        {% endif %}
+        </body>
+    {% endif %}
         <!-- End page content -->
-
+    </div>
         <!-- W3.CSS Container -->
         <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
-            <p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS"
-                                              target="_blank" class="w3-hover-opacity">w3.css</a></p>
+            <p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
         <script>
             function submitForm() {
-                if (!checkSummation()) {
+                if(!checkSummation()){
                     alert("Puntajes Incorrectos.");
                     return;
                 }
@@ -276,7 +268,7 @@
                 var min_duration = document.getElementById("min_duration").value;
                 var max_duration = document.getElementById("max_duration").value;
 
-                if (min_duration.trim() == '' || max_duration.trim() == '') {
+                if(min_duration.trim()==''||max_duration.trim()==''){
                     alert("no has seleccionado duraciones");
                     return;
                 }
@@ -286,20 +278,20 @@
                 f.submit();
             }
 
-            function checkSummation() {
-                return Math.abs(getSummation() - 6.0) < 0.01;
+            function checkSummation(){
+                return Math.abs(getSummation()-6.0)<0.01;
             }
 
-            function getSummation() {
+            function getSummation(){
                 var table = document.getElementById("rubric");
                 var rows = table.rows;
                 var width = getColls();
 
                 var suma = 0;
-                for (var r = 1; r < table.rows.length; r++) {
+                for(var r = 1; r<table.rows.length;r++){
                     var index = 0;
-                    for (var c = 1; c < getColls(); c++) {
-                        if (table.rows[r].cells[c].getElementsByTagName("input")[0].value.trim() != '') {
+                    for(var c = 1; c<getColls(); c++){
+                        if(table.rows[r].cells[c].getElementsByTagName("input")[0].value.trim()!=''){
                             index = c;
                         }
                     }
@@ -335,8 +327,7 @@
                 var table = document.getElementById("rubric");
                 var row = table.insertRow(-1);
                 var aspectCell = row.insertCell(0);
-                aspectCell.outerHTML = '<th> {% if readonly == None %}
-                     <span style="color:red;" onclick="deleteRow(this)"><i class="fa fa-trash" aria-hidden="true"></i></span> {% endif %} <input type="text" name="" class="form-control" placeholder="Aspecto" /></th>';
+                aspectCell.outerHTML = '<th> {% if readonly == None %} <span style="color:red;" onclick="deleteRow(this)"><i class="fa fa-trash" aria-hidden="true"></i></span> {% endif %} <input type="text" name="" class="form-control" placeholder="Aspecto" /></th>';
                 for (var i = 1; i < getColls(); i++) {
                     var cell = row.insertCell(i);
                     cell.innerHTML = '<input type="text" name="" class="form-control" placeholder="Descripción" />';
@@ -348,8 +339,7 @@
                 var table = document.getElementById("rubric");
                 var rows = table.rows;
                 var th = rows[0].insertCell(-1);
-                th.innerHTML = '{% if readonly == None %}
-                    <span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="deleteCol(this)"></i></span> {% endif %} <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje">';
+                th.innerHTML = '{% if readonly == None %}<span style="color:red;" ><i class="fa fa-trash delete-col" aria-hidden="true" onclick="deleteCol(this)"></i></span> {% endif %} <input type="number" step="0.1" name="" class="form-control" placeholder="Puntaje">';
                 for (var i = 1; i < rows.length; i++) {
                     var td = rows[i].insertCell(-1);
                     td.innerHTML = '<input type="text" name="" class="form-control" placeholder="Descripción" />';
@@ -406,41 +396,41 @@
 
             <script>
 
-                function cleanTable() {
-                    var table = document.getElementById("rubric");
-                    while (table.rows.length > 1) {
-                        table.deleteRow(table.rows.length - 1);
-                    }
-                    while (table.rows[0].cells.length > 1) {
-                        table.rows[0].deleteCell(getColls() - 1);
-                    }
-                    while (table.rows.length <{{ rows }}) {
-                        addRow();
-                    }
-                    while (getColls() <{{ colls }}) {
-                        addColumn();
-                    }
-
-                    var rows = table.rows.length;
-                    var colls = getColls();
-
-                    var info = {{ data|safe }};
-
-                    for (var i = 0; i < rows; i++) {
-                        for (var j = 0; j < colls; j++) {
-                            var field = table.rows[i].cells[j];
-                            var inputs = field.getElementsByTagName("input");
-                            inputs[0].value = info[i][j];
-                        }
-                    }
+            function cleanTable(){
+                var table = document.getElementById("rubric");
+                while(table.rows.length>1){
+                    table.deleteRow(table.rows.length-1);
+                }
+                while(table.rows[0].cells.length>1){
+                    table.rows[0].deleteCell(getColls()-1);
+                }
+                while(table.rows.length<{{ rows }}){
+                    addRow();
+                }
+                while(getColls()<{{ colls }}){
+                    addColumn();
                 }
 
-                cleanTable();
+                var rows = table.rows.length;
+                var colls = getColls();
 
-                var inputs = document.getElementsByTagName("input");
-                $("#myForm :input").attr("disabled", true);
+                var info = {{ data|safe }};
 
-                console.log(inputs);
+                for (var i=0;i<rows;i++){
+                    for (var j=0;j<colls;j++){
+                        var field = table.rows[i].cells[j];
+                        var inputs = field.getElementsByTagName("input");
+                        inputs[0].value = info[i][j];
+                    }
+                }
+            }
+
+            cleanTable();
+
+            var inputs = document.getElementsByTagName("input");
+            $("#myForm :input").attr("disabled", true);
+
+            console.log(inputs);
 
 
             </script>
@@ -449,45 +439,44 @@
 
         {% if modify != None %}
 
-            <script>
-                console.log("modo modificar");
-
-                function cleanTable() {
-                    var table = document.getElementById("rubric");
-                    while (table.rows.length > 1) {
-                        table.deleteRow(table.rows.length - 1);
-                    }
-                    while (table.rows[0].cells.length > 1) {
-                        table.rows[0].deleteCell(getColls() - 1);
-                    }
-                    while (table.rows.length <{{ rows }}) {
-                        addRow();
-                    }
-                    while (getColls() <{{ colls }}) {
-                        addColumn();
-                    }
-
-                    var rows = table.rows.length;
-                    var colls = getColls();
-
-                    var info = {{ data|safe }};
-
-                    for (var i = 0; i < rows; i++) {
-                        for (var j = 0; j < colls; j++) {
-                            var field = table.rows[i].cells[j];
-                            var inputs = field.getElementsByTagName("input");
-                            inputs[0].value = info[i][j];
-                        }
-                    }
+        <script>
+            console.log("modo modificar");
+            function cleanTable(){
+                var table = document.getElementById("rubric");
+                while(table.rows.length>1){
+                    table.deleteRow(table.rows.length-1);
+                }
+                while(table.rows[0].cells.length>1){
+                    table.rows[0].deleteCell(getColls()-1);
+                }
+                while(table.rows.length<{{ rows }}){
+                    addRow();
+                }
+                while(getColls()<{{ colls }}){
+                    addColumn();
                 }
 
-                $("#inputnombrerubrica").attr("readonly", true);
-                cleanTable();
+                var rows = table.rows.length;
+                var colls = getColls();
+
+                var info = {{ data|safe }};
+
+                for (var i=0;i<rows;i++){
+                    for (var j=0;j<colls;j++){
+                        var field = table.rows[i].cells[j];
+                        var inputs = field.getElementsByTagName("input");
+                        inputs[0].value = info[i][j];
+                    }
+                }
+            }
+
+            $("#inputnombrerubrica").attr("readonly", true);
+            cleanTable();
 
 
-            </script>
+        </script>
 
         {% endif %}
 
-    </div>
+
 {% endblock %}
