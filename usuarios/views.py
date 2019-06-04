@@ -137,7 +137,7 @@ def rubricas(request):
     return render(request, 'Admin_interface/Rubricas_admin.html')
 
 def evaluaciones(request):
-    evaluaciones_ = Evaluacion.objects.all().order_by('-id')
+    evaluaciones_ = Evaluacion.objects.all()
     evaluadores = Evaluador.objects.all()
     cursos = Curso.objects.all()
     rubricas = Rubrica.objects.all()

@@ -63,9 +63,8 @@
                 }
             }
 
-            var button_3 = document.createElement('a');
+            var button_3 = document.createElement('button');
             button_3.className = "w3-button w3-large w3-red w3-round";
-            button_3.href = "/eval/e/" + id
             button_3.innerHTML = 'Ver';
 
             var the_span = document.createElement('span');
@@ -172,21 +171,111 @@
 
 
 
+
+               var rub_mod = document.createElement('select');
+               rub_mod.required=true;
+               rub_mod.name="rubrica";
+               {% for rubrica in rubricas %}
+
+                var rub = document.createElement('option');
+                rub.value='{{ rubrica.id}}';
+                rub.innerHTML='{{ rubrica.nombre }}';
+                if ('{{ rubrica.id }}' == id_rubrica ){
+                    rub.selected="selected";
+               }
+                rub_mod.appendChild(rub);
+               {% endfor %}
+                form_mod.appendChild(rub_label);
+                form_mod.appendChild(rub_mod);
+
+
             form_mod.appendChild(document.createElement('br'));
             form_mod.appendChild(document.createElement('br'));
             form_mod.appendChild(evaluadores_label);
             form_mod.appendChild(document.createElement('br'));
+            {% for evaluador in evaluadores %}
+                var datos='{{ evaluador.email }}';
 
+                var este_mail_eval  = document.createElement('input');
+                este_mail_eval.type="checkbox";
+                este_mail_eval.name="evals";
+                este_mail_eval.value=datos;
+                for (e in mis_evals){
+
+                    if (mis_evals[e] == datos){
+                        este_mail_eval.checked= true;
+                    }
+                }
+                var label_e = document.createElement("label");
+                 label_e.innerHTML=" "+'{{ evaluador.nombre }}' + " "+'{{ evaluador.apellido }}' + " ( " + datos + " ) ";
+
+                form_mod.appendChild(este_mail_eval);
+                form_mod.appendChild(label_e);
+                form_mod.appendChild(document.createElement('br'));
+
+            {% endfor %}
+
+            var this_mod = document.createElement('input');
+            this_mod.style.display = "none";
+            this_mod.name = "evaluacion";
+            this_mod.value=id;
+            form_mod.appendChild(this_mod);
+
+            var button_mod = document.createElement('button');
+            button_mod.className = "w3-button w3-large w3-red w3-right w3-round";
+            button_mod.innerHTML = 'Aceptar';
+            button_mod.id = "modificar_" + nombre;
+            button_mod.type = 'submit';
+
+            form_mod.appendChild(button_mod);
 
             div2_mod.appendChild(form_mod);
 
+            var div_mod = document.createElement('div');
+            div_mod.id="modificar_"+nombre;
+            div_mod.className="w3-modal";
+            div_mod.appendChild(div2_mod);
 
 
+
+            var button_4 = document.createElement('button');
+            button_4.className = "w3-button w3-large w3-red w3-margin-left w3-round";
+            button_4.innerHTML = 'Modificar';
+            button_4.id='Modificar_';
+            button_4.onclick = function() {
+                var x = document.getElementById("modificar_"+nombre);
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+            button_4.type='submit';
+
+
+            var button_5 = document.createElement('button');
+            button_5.className = "w3-button w3-large w3-red w3-right w3-round";
+            button_5.innerHTML = 'Eliminar';
+            button_5.id = "Eliminar_" + nombre;
+            button_5.type = 'submit';
+
+            var delete_input = document.createElement('input');
+            delete_input.type = "hidden";
+            delete_input.name = "id_evaluacion";
+            delete_input.value = id;
 
             var csrf_input = document.createElement('input');
             csrf_input.type = "hidden";
             csrf_input.name = "csrfmiddlewaretoken";
             csrf_input.value = '{{ csrf_token }}';
+
+            var delete_form = document.createElement('form');
+            delete_form.id = "eliminar_form_" + nombre;
+            delete_form.method = 'post';
+            delete_form.action = 'delete/';
+            delete_form.appendChild(csrf_input);
+            delete_form.appendChild(delete_input);
+            delete_form.appendChild(button_5);
 
             var li1 = document.createElement('li');
             li1.innerHTML = "Curso: " + curso;
@@ -210,11 +299,17 @@
             div.style.width = '75%';
             div.appendChild(par);
             div.appendChild(button_3);
-
+            div.appendChild(button_4);
+            div.appendChild(delete_form);
 
             document.getElementById("main_content").appendChild(super_button);
             document.getElementById("main_content").appendChild(div);
             document.body.appendChild(div_mod);
+            the_span.onclick = function(){
+                window.location.href = "../../a/eval"
+                }
+
+
         }
 
 
