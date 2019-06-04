@@ -10,7 +10,7 @@
 <div id="main_content" class="w3-main" style="margin-left:340px;margin-right:40px">
   <!-- Portada -->
   <div class="w3-container" id="portada" style="margin-top:80px; margin-bottom:10px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Evaluaciones</b></h1>
+    <h1 class="w3-xxxlarge w3-text-red"><b>Bienvenido/a!</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
   </div>
     <!--Seccion rubricas-->
@@ -63,8 +63,9 @@
                 }
             }
 
-            var button_3 = document.createElement('button');
+            var button_3 = document.createElement('a');
             button_3.className = "w3-button w3-large w3-red w3-round";
+            button_3.href = "/eval/e/" + id
             button_3.innerHTML = 'Ver';
 
             var the_span = document.createElement('span');
@@ -231,33 +232,13 @@
 
             div2_mod.appendChild(form_mod);
 
-            var div_mod = document.createElement('div');
-            div_mod.id="modificar_"+nombre;
-            div_mod.className="w3-modal";
-            div_mod.appendChild(div2_mod);
 
 
 
-            var button_4 = document.createElement('button');
-            button_4.className = "w3-button w3-large w3-red w3-margin-left w3-round";
-            button_4.innerHTML = 'Modificar';
-            button_4.id='Modificar_';
-            button_4.onclick = function() {
-                var x = document.getElementById("modificar_"+nombre);
-                if (x.className.indexOf("w3-show") == -1) {
-                    x.className += " w3-show";
-                } else {
-                    x.className = x.className.replace(" w3-show", "");
-                }
-            }
-            button_4.type='submit';
 
 
-            var button_5 = document.createElement('button');
-            button_5.className = "w3-button w3-large w3-red w3-right w3-round";
-            button_5.innerHTML = 'Eliminar';
-            button_5.id = "Eliminar_" + nombre;
-            button_5.type = 'submit';
+
+
 
             var delete_input = document.createElement('input');
             delete_input.type = "hidden";
@@ -275,7 +256,7 @@
             delete_form.action = 'delete/';
             delete_form.appendChild(csrf_input);
             delete_form.appendChild(delete_input);
-            delete_form.appendChild(button_5);
+
 
             var li1 = document.createElement('li');
             li1.innerHTML = "Curso: " + curso;
@@ -299,14 +280,12 @@
             div.style.width = '75%';
             div.appendChild(par);
             div.appendChild(button_3);
-            div.appendChild(button_4);
             div.appendChild(delete_form);
 
             document.getElementById("main_content").appendChild(super_button);
             document.getElementById("main_content").appendChild(div);
-            document.body.appendChild(div_mod);
             the_span.onclick = function(){
-                window.location.href = "../../a/eval"
+                window.location.href = "../../e/eval"
                 }
 
 

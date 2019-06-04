@@ -101,7 +101,7 @@
                             <ul class="w3-ul w3-light-grey w3-center w3-card-4">
                                 {% for estudiante in equipo.estudiantes.all %}
                                     <li class="w3-padding-16">
-                                        <a href="/eval/e/{{ evaluacion.id }}/{{ equipo.id }}/{{ estudiante.id }}" >{{ estudiante }}</a>
+                                        <a href="/eval/a/{{ evaluacion.id }}/{{ equipo.id }}/{{ estudiante.id }}" >{{ estudiante }}</a>
                                     </li>
 
                                 {% endfor %}

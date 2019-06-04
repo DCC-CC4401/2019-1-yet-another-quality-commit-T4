@@ -19,8 +19,9 @@ def evaluacion(request, evaluacion_id, equipo_id, estudiante_id):
     estudiante = Estudiante.objects.get(id=estudiante_id)
     equipo = Equipo.objects.get(id=equipo_id)
     d_user = request.user
+    print(Evaluador.objects.all())
+    print(d_user)
     evaluador = Evaluador.objects.get(user=d_user)
-    print(evaluador.email)
     curso = evaluacion.curso
 
     print(evaluacion, r, estudiante, equipo, evaluador)
